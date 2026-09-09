@@ -88,7 +88,7 @@ A comprehensive, free, browser-based PDF platform with **48+ tools**. No sign-up
 | **PDF Info** | Reads page count, metadata, dates, and per-page dimensions |
 | **Repair PDF** | Re-parses and re-serializes the file, which fixes many structural issues |
 | **Compare PDF** | Extracts text of both files page-by-page and reports identical/different per page |
-| **OCR PDF** | *Coming soon* |
+| **OCR PDF** | Renders each page and runs Tesseract.js OCR entirely in your browser (English); the OCR engine is downloaded from a CDN on first use |
 
 ## Tech Stack
 
@@ -99,6 +99,7 @@ A comprehensive, free, browser-based PDF platform with **48+ tools**. No sign-up
 | **Bootstrap Icons** | Icon system |
 | **pdf-lib** | Client-side PDF creation & manipulation |
 | **PDF.js** | PDF rendering & text extraction |
+| **Tesseract.js** | In-browser OCR for scanned documents (loaded on demand) |
 | **binary-utils.js** | In-house zero-dependency ZIP/BMP/TIFF/DOCX/CSV encoders (Node-testable) |
 | **Google Fonts (Inter)** | Typography |
 

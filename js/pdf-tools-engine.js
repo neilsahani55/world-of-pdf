@@ -57,7 +57,7 @@
         'compare-pdf':    { name: 'Compare PDF', desc: 'Find text differences between two PDFs', icon: 'bi-file-diff', color: 'purple', accept: '.pdf', multiple: true, btnText: 'Compare', minFiles: 2 },
         'edit-pdf':       { name: 'Edit PDF', desc: 'Add text and images to your PDF', icon: 'bi-pencil', color: 'purple', accept: '.pdf', btnText: 'Edit PDF', soon: true },
         'redact-pdf':     { name: 'Redact PDF', desc: 'Permanently black out sensitive info', icon: 'bi-eraser-fill', color: 'rose', accept: '.pdf', btnText: 'Redact', soon: true },
-        'ocr-pdf':        { name: 'OCR PDF', desc: 'Extract text from scanned documents', icon: 'bi-eye', color: 'teal', accept: '.pdf', btnText: 'Run OCR', soon: true },
+        'ocr-pdf':        { name: 'OCR PDF', desc: 'Extract text from scanned documents', icon: 'bi-eye', color: 'teal', accept: '.pdf', btnText: 'Run OCR' },
     };
 
     /* ── Detect Tool from URL ── */
@@ -391,6 +391,7 @@
             'pdf-info': processPdfInfo,
             'repair-pdf': processRepair,
             'compare-pdf': processCompare,
+            'ocr-pdf': processOcr,
         };
         const fn = processors[slug];
         if (fn) await fn();
@@ -1081,6 +1082,44 @@
             else result += 'Page ' + i + ': DIFFERENT\n  File 1: ' + text1.substring(0, 100) + '...\n  File 2: ' + text2.substring(0, 100) + '...\n';
         }
         setResult(new Blob([result], { type: 'text/plain' }), 'comparison.txt');
+    }
+
+    /* ─── OCR (Tesseract.js, loaded on demand — runs fully in-browser) ─── */
+    function loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = src;
+            s.onload = resolve;
+            s.onerror = () => reject(new Error('Could not load the OCR engine. Please check your internet connection and try again.'));
+            document.head.appendChild(s);
+        });
+    }
+
+    async function processOcr() {
+        const status = $('#processingDesc');
+        if (!window.Tesseract) {
+            if (status) status.textContent = 'Loading OCR engine (first run only)...';
+            await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js');
+        }
+        const bytes = await readFile(selectedFiles[0]);
+        const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+        const total = pdf.numPages;
+        if (status) status.textContent = 'Preparing text recognition...';
+        const worker = await Tesseract.createWorker('eng');
+        let out = '';
+        try {
+            for (let i = 1; i <= total; i++) {
+                if (status) status.textContent = 'Recognizing page ' + i + ' of ' + total + '... (this can take a few seconds per page)';
+                const { canvas } = await renderPdfPage(pdf, i);
+                const { data } = await worker.recognize(canvas);
+                out += '--- Page ' + i + ' ---\n' + data.text.trim() + '\n\n';
+                setProgress(10 + (80 * i / total));
+            }
+        } finally {
+            await worker.terminate();
+            if (status) status.textContent = 'This usually takes just a few seconds.';
+        }
+        setResult(new Blob([out], { type: 'text/plain' }), 'ocr-text.txt');
     }
 
     /* ── Helpers ── */

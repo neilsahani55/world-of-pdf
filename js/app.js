@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'PDF Info', desc: 'View page count, metadata & details', cat: 'Utility', icon: 'bi-info-circle', color: 'indigo', href: 'tools/pdf-info.html' },
         { name: 'Repair PDF', desc: 'Fix corrupted or damaged PDF files', cat: 'Utility', icon: 'bi-wrench', color: 'orange', href: 'tools/repair-pdf.html' },
         { name: 'Compare PDF', desc: 'Find text differences between two PDFs', cat: 'Utility', icon: 'bi-file-diff', color: 'purple', href: 'tools/compare-pdf.html' },
-        { name: 'OCR PDF', desc: 'Extract text from scanned documents', cat: 'Utility', icon: 'bi-eye', color: 'teal', href: 'tools/ocr-pdf.html', soon: true },
+        { name: 'OCR PDF', desc: 'Extract text from scanned documents', cat: 'Utility', icon: 'bi-eye', color: 'teal', href: 'tools/ocr-pdf.html' },
     ];
 
     /* ── Render Tool Cards ── */
