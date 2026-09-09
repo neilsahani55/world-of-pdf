@@ -1184,6 +1184,17 @@ body {
 /* ── Mobile footer alignment ── */
 @media (max-width: 767px) {
     .site-footer .row > div { text-align: center; }
+    .footer-stats-band { padding: 1rem 0.5rem; }
+    .footer-stats-band .d-flex {
+        flex-wrap: nowrap !important;
+        gap: 0 !important;
+        justify-content: center;
+    }
+    .footer-stat {
+        padding: 0 0.7rem;
+        font-size: 0.72rem;
+        white-space: nowrap;
+    }
     .footer-trust-row {
         flex-wrap: nowrap !important;
         justify-content: center;
