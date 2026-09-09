@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toolGrid = document.getElementById('toolGrid');
     if (toolGrid) {
         toolGrid.innerHTML = tools.map(t => `
-            <div class="col-6 col-md-4 col-lg-3 col-xl-2 tool-card-col" data-name="${t.name.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-category="${t.cat}">
+            <div class="tool-card-col" data-name="${t.name.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-category="${t.cat}">
                 <a href="${t.href}" class="tool-box${t.soon ? ' tool-box--soon' : ''}">
                     <div class="tool-box-icon tool-icon--${t.color}">
                         <i class="bi ${t.icon}"></i>

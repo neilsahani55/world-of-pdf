@@ -19,6 +19,20 @@ A comprehensive, free, browser-based PDF platform with **48+ tools**. No sign-up
 - **Fully Responsive** — Works on desktop, tablet, and mobile
 - **Tool-to-Tool Navigation** — Full category menus on every page, plus search & filter on the homepage
 
+## All 49 Tools
+
+**Merge & Organize (6):** Merge PDF · Split PDF · Organize PDF · Rotate PDF · Remove Pages · Extract Pages
+
+**Convert to PDF (8):** Image to PDF · HTML to PDF · Word to PDF · Excel to PDF · PowerPoint to PDF · Text to PDF · Markdown to PDF · Base64 to PDF
+
+**Convert from PDF (13):** PDF to PNG · PDF to JPG · PDF to TIFF · PDF to BMP · PDF to Word · PDF to Excel · PDF to PowerPoint · PDF to Text · PDF to HTML · PDF to Markdown · PDF to XML · PDF to CSV · PDF to Base64
+
+**Edit & Enhance (12):** Compress PDF · Watermark · Page Numbers · Edit PDF · Header & Footer · N-up PDF · Crop PDF · Resize PDF · Grayscale · Flatten PDF · Metadata · PDF/A
+
+**Security (4):** Protect PDF · Unlock PDF · Redact PDF · Sign PDF
+
+**Extract & Utility (6):** Extract Images · Extract Links · PDF Info · Repair PDF · Compare PDF · OCR PDF
+
 ## How Each Tool Works
 
 ### Merge & Organize
