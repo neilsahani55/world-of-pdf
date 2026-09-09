@@ -418,17 +418,27 @@
             if (ext === 'pdf') {
                 const data = new Uint8Array(await resultBlob.arrayBuffer());
                 const pdf = await pdfjsLib.getDocument({ data }).promise;
-                const page = await pdf.getPage(1);
-                const base = page.getViewport({ scale: 1 });
-                const vp = page.getViewport({ scale: Math.min(1.5, 380 / base.width) });
-                const canvas = document.createElement('canvas');
-                canvas.width = vp.width; canvas.height = vp.height;
-                await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-                area.appendChild(canvas);
-                const cap = document.createElement('div');
-                cap.className = 'preview-caption';
-                cap.textContent = 'Page 1 of ' + pdf.numPages;
-                area.appendChild(cap);
+                const total = pdf.numPages;
+                const maxPages = Math.min(total, 25);
+                if (total > 1) {
+                    const cap = document.createElement('div');
+                    cap.className = 'preview-caption';
+                    cap.textContent = total + ' pages — scroll to view' + (total > maxPages ? ' (showing first ' + maxPages + ')' : '');
+                    area.appendChild(cap);
+                }
+                for (let i = 1; i <= maxPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const base = page.getViewport({ scale: 1 });
+                    const vp = page.getViewport({ scale: Math.min(1.5, 380 / base.width) });
+                    const canvas = document.createElement('canvas');
+                    canvas.width = vp.width; canvas.height = vp.height;
+                    await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+                    area.appendChild(canvas);
+                    const label = document.createElement('div');
+                    label.className = 'preview-caption';
+                    label.textContent = 'Page ' + i + ' of ' + total;
+                    area.appendChild(label);
+                }
             } else if (['png', 'jpg', 'jpeg', 'bmp'].indexOf(ext) !== -1) {
                 const img = document.createElement('img');
                 img.src = URL.createObjectURL(resultBlob);
@@ -440,9 +450,28 @@
                 area.appendChild(pre);
             } else if (ext === 'zip') {
                 const entries = BinUtils.zipParse(new Uint8Array(await resultBlob.arrayBuffer()));
-                const pre = document.createElement('pre');
-                pre.textContent = 'Archive contents (' + entries.length + ' files):\n' + entries.map(e => '  • ' + e.name).join('\n');
-                area.appendChild(pre);
+                const imgEntries = entries.filter(e => /\.(png|jpe?g|bmp)$/i.test(e.name) && e.method === 0);
+                if (imgEntries.length === entries.length && imgEntries.length > 0) {
+                    // ZIP of images: show the actual images, scrollable
+                    const maxImgs = Math.min(imgEntries.length, 15);
+                    const cap = document.createElement('div');
+                    cap.className = 'preview-caption';
+                    cap.textContent = entries.length + ' images — scroll to view' + (imgEntries.length > maxImgs ? ' (showing first ' + maxImgs + ')' : '');
+                    area.appendChild(cap);
+                    for (let i = 0; i < maxImgs; i++) {
+                        const img = document.createElement('img');
+                        img.src = URL.createObjectURL(new Blob([imgEntries[i].data]));
+                        area.appendChild(img);
+                        const label = document.createElement('div');
+                        label.className = 'preview-caption';
+                        label.textContent = imgEntries[i].name;
+                        area.appendChild(label);
+                    }
+                } else {
+                    const pre = document.createElement('pre');
+                    pre.textContent = 'Archive contents (' + entries.length + ' files):\n' + entries.map(e => '  • ' + e.name).join('\n');
+                    area.appendChild(pre);
+                }
             } else if (ext === 'docx') {
                 const text = await BinUtils.docxToText(new Uint8Array(await resultBlob.arrayBuffer()));
                 const pre = document.createElement('pre');

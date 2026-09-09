@@ -224,7 +224,9 @@
     border: 1px solid var(--border-color);
     border-radius: 6px;
     background: #fff;
+    margin-top: 6px;
 }
+.preview-area .preview-caption { margin-bottom: 8px; }
 .preview-area pre {
     text-align: left;
     font-size: 0.72rem;
