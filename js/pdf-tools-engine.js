@@ -62,6 +62,59 @@
         'ocr-pdf':        { name: 'OCR PDF', desc: 'Extract text from scanned documents', icon: 'bi-eye', color: 'teal', accept: '.pdf', btnText: 'Run OCR' },
     };
 
+    /* ── Per-tool guide content (About section on every tool page) ── */
+    const TOOL_INFO = {
+        'merge-pdf':      { about: 'Combine two or more PDF files into a single document. Drag the uploaded files to set their order — pages are copied losslessly and keep their original size, orientation, and quality.' },
+        'split-pdf':      { about: 'Break a PDF apart. "Every page" mode saves each page as its own PDF and bundles them into a ZIP archive; "custom ranges" mode pulls exactly the pages you list (e.g. 1-3, 7) into one new PDF.' },
+        'organize-pdf':   { about: 'Rearrange a PDF without external software: reverse the page order, keep only odd or even pages, or type a fully custom order like 3,1,2 to rebuild the document exactly how you want it.' },
+        'rotate-pdf':     { about: 'Rotate every page or just the pages you pick by 90°, 180°, or 270°. The rotation is stored in the PDF itself, so quality is untouched.' },
+        'remove-pages':   { about: 'Delete unwanted pages. List the pages or ranges to remove (e.g. 2, 5-7) and the tool rebuilds the document with everything else in its original order.' },
+        'extract-pages':  { about: 'Pull specific pages out into a brand-new PDF. Your original file stays untouched — only the pages you list are copied into the result.' },
+        'image-to-pdf':   { about: 'Turn images into a PDF, one page per image, each page sized to match the image exactly. JPG and PNG are embedded directly; GIF, BMP, and WebP are converted automatically. Drag images to reorder them.' },
+        'word-to-pdf':    { about: 'Convert Word documents to PDF right in your browser: the .docx is unzipped locally, its text extracted, and typeset onto clean A4 pages. Plain text and RTF files work too.', note: 'This is a text-focused conversion — complex layouts, tables, and embedded images from the original document are not preserved. Legacy binary .doc files are not supported; save them as .docx first.' },
+        'text-to-pdf':    { about: 'Convert plain text (.txt, .csv, .log, .md) into a paginated A4 PDF with automatic word-wrapping and page breaks.' },
+        'html-to-pdf':    { about: 'Convert an HTML file into a readable PDF. Scripts and styles are stripped and the page’s text content is typeset onto A4 pages.', note: 'The visual layout of the web page is not reproduced — this converts the readable text.' },
+        'markdown-to-pdf': { about: 'Turn a Markdown file into a paginated PDF document with automatic wrapping and page breaks.' },
+        'excel-to-pdf':   { about: 'Convert CSV or TSV spreadsheet data into a clean, paginated PDF.', note: 'Binary .xlsx workbooks are not supported — export your sheet as CSV first.' },
+        'powerpoint-to-pdf': { about: 'Extract the text of every slide from a .pptx presentation (unzipped locally in your browser) and convert it into a paginated PDF, one section per slide.', note: 'Slide designs and images are not preserved — this converts the slide text.' },
+        'base64-to-pdf':  { about: 'Decode a Base64 string back into a PDF file. Paste the string (data-URI prefixes and whitespace are handled automatically) or upload a .txt file containing it.', note: 'If the decoded data does not start with a PDF header you will be warned before downloading.' },
+        'pdf-to-png':     { about: 'Render every page of your PDF as a high-resolution PNG image (2× scale). A single-page PDF downloads as one image; multi-page PDFs arrive as a ZIP with one PNG per page.' },
+        'pdf-to-jpg':     { about: 'Convert PDF pages to JPG photos at 2× resolution. One page gives you a single image; multiple pages are bundled into a ZIP.' },
+        'pdf-to-tiff':    { about: 'Convert PDF pages into genuine uncompressed RGB TIFF files, written byte-by-byte in your browser. Multi-page PDFs download as a ZIP.', note: 'Browsers can’t display TIFF inline, so the preview is unavailable — download to view the files.' },
+        'pdf-to-bmp':     { about: 'Convert PDF pages into real 24-bit BMP bitmaps. Multi-page PDFs download as a ZIP with one BMP per page.' },
+        'pdf-to-word':    { about: 'Extract the text of your PDF — grouped into visual lines by position — and package it as a genuine Word .docx file you can open and edit in Microsoft Word or LibreOffice.', note: 'Layout, fonts, and images are not carried over; you get clean editable text.' },
+        'pdf-to-excel':   { about: 'Rebuild tables from your PDF by analysing the position of every piece of text, then export the rows and columns as a CSV file that opens directly in Excel.', note: 'Works best on PDFs with clear table-like layouts. Scanned PDFs need OCR first.' },
+        'pdf-to-powerpoint': { about: 'Extract each page’s text into a per-page outline — a quick way to turn a PDF report into raw material for slides.' },
+        'pdf-to-text':    { about: 'Extract all text from your PDF into a plain .txt file, grouped into visual lines with a marker for each page.', note: 'Scanned PDFs have no text layer — use the OCR PDF tool for those.' },
+        'pdf-to-html':    { about: 'Convert your PDF’s text into a clean, styled standalone HTML page — one section per PDF page.' },
+        'pdf-to-markdown': { about: 'Export your PDF’s text as Markdown, with a "## Page N" heading for every page — handy for notes, wikis, and documentation.' },
+        'pdf-to-xml':     { about: 'Export the document as structured XML: one <page> element per page with a <text> node for every text fragment.' },
+        'pdf-to-csv':     { about: 'Detect rows and columns from the position of text on each page and export them as a properly escaped CSV file.', note: 'Works best on PDFs with table-like layouts. Scanned PDFs need OCR first.' },
+        'pdf-to-base64':  { about: 'Encode your PDF as a Base64 text string — useful for embedding PDFs in JSON APIs, data URIs, or email systems. Handles large files without breaking.' },
+        'compress-pdf':   { about: 'Re-save your PDF with object streams enabled — a lossless optimisation that removes structural overhead. Quality is completely untouched.', note: 'Savings vary by file. PDFs that are mostly scanned images may not shrink much, since the images themselves are not recompressed.' },
+        'watermark-pdf':  { about: 'Stamp custom text across every page — set the wording, size, opacity, and angle. Great for CONFIDENTIAL, DRAFT, or branding marks.' },
+        'page-numbers':   { about: 'Add page numbers to every page. Choose the corner or center position, the starting number, and a format like "1", "- 1 -", or "Page 1".' },
+        'edit-pdf':       { about: 'Stamp your own text — any size, color, and position — and optionally a PNG or JPG image onto all pages, the first page, or the last page of your PDF.' },
+        'header-footer':  { about: 'Add a consistent header line, footer line, or both to every page, aligned left, center, or right — ideal for document titles, filenames, or confidentiality labels.' },
+        'nup-pdf':        { about: 'Print-friendly layouts: place 2 pages side by side on a landscape sheet or 4 pages in a grid on a portrait sheet. Pages are scaled to fit and centered in their slots.' },
+        'crop-pdf':       { about: 'Trim margins from every page by setting how many points to cut from the top, bottom, left, and right (72 points = 1 inch).' },
+        'resize-pdf':     { about: 'Change the page size of your document to A3, A4, A5, Letter, or Legal. Content keeps its position while the page dimensions change.' },
+        'grayscale-pdf':  { about: 'Convert a color PDF to black & white by re-rendering each page and converting every pixel to grayscale — great for printing.', note: 'Pages become images in the output, so text is no longer selectable.' },
+        'flatten-pdf':    { about: 'Bake interactive form fields into the page itself, so what’s filled in can no longer be edited — ideal before sharing completed forms.' },
+        'metadata-pdf':   { about: 'View and rewrite the document’s title, author, subject, and keywords — the fields shown by search engines and PDF readers.' },
+        'pdfa-convert':   { about: 'Prepare a document for archiving: form fields are flattened and the file is re-saved with clean structure.', note: 'This is a best-effort archival conversion, not a certified PDF/A validator.' },
+        'protect-pdf':    { about: 'Prepare a PDF for password protection.', note: 'True AES encryption cannot be applied by browsers with this library — the output is re-saved but not encrypted, and the result screen says so honestly. For strong encryption use a desktop tool.' },
+        'unlock-pdf':     { about: 'Remove password restrictions from PDFs you own, so they open without a prompt. The document is loaded ignoring its protection and re-saved clean.', note: 'Only use this on documents you have the right to unlock.' },
+        'redact-pdf':     { about: 'Enter words or phrases (one per line) and every match found in the document is blacked out. Pages are then converted to images, so the redacted text is permanently removed from the file — not just hidden.', note: 'Redaction is irreversible by design. The whole text run containing a match is covered (over-redaction is the safe direction), and output pages are no longer selectable text.' },
+        'sign-pdf':       { about: 'Draw your signature with a mouse or finger, then stamp it in the bottom-right corner of the first, last, or every page.' },
+        'extract-images': { about: 'Render every page of your PDF as a high-resolution PNG. One page downloads directly; multiple pages arrive as a ZIP.' },
+        'extract-links':  { about: 'Scan every page’s link annotations and list all URLs found in the document, with the page number where each one lives.' },
+        'pdf-info':       { about: 'Inspect a PDF: page count, title, author, subject, creator, producer, creation and modification dates, plus the exact dimensions of every page in points and inches.' },
+        'repair-pdf':     { about: 'Attempt to fix damaged PDFs by fully re-parsing and re-serializing the document — this resolves many structural problems like broken cross-reference tables.', note: 'Severely corrupted files that cannot be parsed at all cannot be repaired in the browser.' },
+        'compare-pdf':    { about: 'Upload two PDFs and get a page-by-page report of whether each page’s text is identical or different, with a snippet of each difference.' },
+        'ocr-pdf':        { about: 'Extract text from scanned documents using Tesseract OCR running entirely in your browser: each page is rendered as an image and recognized (English), then all text downloads as a .txt file.', note: 'The OCR engine (~2 MB) is downloaded on first use. Recognition takes a few seconds per page — your document itself never leaves your device.' },
+    };
+
     /* ── Detect Tool from URL ── */
     const slug = location.pathname.split('/').pop().replace('.html', '');
     const tool = TOOLS[slug];
@@ -82,6 +135,25 @@
     const fileInput = $('#fileInput');
     fileInput.accept = tool.accept || '.pdf';
     if (tool.multiple) fileInput.multiple = true;
+
+    /* ── About This Tool section ── */
+    (function renderAbout() {
+        const info = TOOL_INFO[slug] || {};
+        const aboutText = $('#toolAboutText');
+        const stepsEl = $('#toolSteps');
+        const noteEl = $('#toolNote');
+        if (aboutText) aboutText.textContent = info.about || tool.desc;
+        if (stepsEl) {
+            const steps = [
+                tool.multiple ? 'Upload your files — drag them to change the order' : 'Upload your file (or drag & drop it)',
+                tool.options ? 'Adjust the options to your liking' : null,
+                'Click "' + (tool.btnText || 'Process') + '" — everything runs locally in your browser',
+                'Check the preview, then download the result (or adjust settings and re-run)',
+            ].filter(Boolean);
+            stepsEl.innerHTML = steps.map(s => '<li>' + s + '</li>').join('');
+        }
+        if (noteEl && info.note) { noteEl.textContent = info.note; noteEl.classList.remove('d-none'); }
+    })();
 
     /* ── State ── */
     let selectedFiles = [];
@@ -321,15 +393,73 @@
         try {
             await processFiles();
             showStep('stepDownload');
+            renderPreview();
         } catch (err) {
             console.error(err);
             alert('Error: ' + err.message);
             showStep('stepConfigure');
         }
     });
-    $('#clearBtn')?.addEventListener('click', () => { selectedFiles = []; showStep('stepUpload'); });
-    $('#startOverBtn')?.addEventListener('click', () => { selectedFiles = []; resultBlob = null; showStep('stepUpload'); });
+    function clearPreview() { const a = $('#previewArea'); if (a) { a.innerHTML = ''; a.classList.add('d-none'); } }
+    $('#clearBtn')?.addEventListener('click', () => { selectedFiles = []; clearPreview(); showStep('stepUpload'); });
+    $('#startOverBtn')?.addEventListener('click', () => { selectedFiles = []; resultBlob = null; clearPreview(); showStep('stepUpload'); });
+    // Back to settings with files and option values intact, so users can tweak and re-run
+    $('#adjustBtn')?.addEventListener('click', () => { clearPreview(); showStep('stepConfigure'); });
     $('#downloadBtn')?.addEventListener('click', () => { if (resultBlob) downloadBlob(resultBlob, resultName); });
+
+    /* ── Result Preview ── */
+    async function renderPreview() {
+        const area = $('#previewArea');
+        if (!area || !resultBlob) return;
+        area.innerHTML = '<div class="preview-label">Preview</div>';
+        area.classList.remove('d-none');
+        try {
+            const ext = (resultName.split('.').pop() || '').toLowerCase();
+            if (ext === 'pdf') {
+                const data = new Uint8Array(await resultBlob.arrayBuffer());
+                const pdf = await pdfjsLib.getDocument({ data }).promise;
+                const page = await pdf.getPage(1);
+                const base = page.getViewport({ scale: 1 });
+                const vp = page.getViewport({ scale: Math.min(1.5, 380 / base.width) });
+                const canvas = document.createElement('canvas');
+                canvas.width = vp.width; canvas.height = vp.height;
+                await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+                area.appendChild(canvas);
+                const cap = document.createElement('div');
+                cap.className = 'preview-caption';
+                cap.textContent = 'Page 1 of ' + pdf.numPages;
+                area.appendChild(cap);
+            } else if (['png', 'jpg', 'jpeg', 'bmp'].indexOf(ext) !== -1) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(resultBlob);
+                area.appendChild(img);
+            } else if (['txt', 'csv', 'md', 'html', 'xml'].indexOf(ext) !== -1) {
+                const text = await resultBlob.text();
+                const pre = document.createElement('pre');
+                pre.textContent = text.slice(0, 1500) + (text.length > 1500 ? '\n… (' + fmtSize(resultBlob.size) + ' total)' : '');
+                area.appendChild(pre);
+            } else if (ext === 'zip') {
+                const entries = BinUtils.zipParse(new Uint8Array(await resultBlob.arrayBuffer()));
+                const pre = document.createElement('pre');
+                pre.textContent = 'Archive contents (' + entries.length + ' files):\n' + entries.map(e => '  • ' + e.name).join('\n');
+                area.appendChild(pre);
+            } else if (ext === 'docx') {
+                const text = await BinUtils.docxToText(new Uint8Array(await resultBlob.arrayBuffer()));
+                const pre = document.createElement('pre');
+                pre.textContent = text.slice(0, 1500) + (text.length > 1500 ? '\n…' : '');
+                area.appendChild(pre);
+            } else if (ext === 'tiff') {
+                const cap = document.createElement('div');
+                cap.className = 'preview-caption';
+                cap.textContent = 'Browsers cannot display TIFF inline — download to view the images.';
+                area.appendChild(cap);
+            } else {
+                area.classList.add('d-none');
+            }
+        } catch (e) {
+            area.classList.add('d-none');
+        }
+    }
 
     /* ── Progress Helper ── */
     function setProgress(pct) { const b = $('#progressBar'); if (b) b.style.width = pct + '%'; }

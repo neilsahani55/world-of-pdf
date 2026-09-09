@@ -330,19 +330,30 @@
                     </div>
                 </div>
 
-                <!-- STEP 4: Download -->
-                <div id="stepDownload" class="d-none text-center py-5">
+                <!-- STEP 4: Preview & Download -->
+                <div id="stepDownload" class="d-none text-center py-4">
                     <div class="download-success-icon"><i class="bi bi-check-circle-fill"></i></div>
                     <h4 class="fw-bold mt-3">Your file is ready!</h4>
-                    <p class="text-muted mb-4" id="downloadInfo"></p>
-                    <button class="btn btn-download btn-lg" id="downloadBtn">
+                    <p class="text-muted mb-3" id="downloadInfo"></p>
+                    <div class="preview-area d-none" id="previewArea"></div>
+                    <button class="btn btn-download btn-lg mt-3" id="downloadBtn">
                         <i class="bi bi-download"></i> Download
                     </button>
-                    <div class="mt-3">
-                        <button class="btn btn-link text-muted" id="startOverBtn"><i class="bi bi-arrow-counterclockwise"></i> Start Over</button>
+                    <div class="mt-3 d-flex gap-2 justify-content-center flex-wrap">
+                        <button class="btn btn-outline-secondary btn-sm" id="adjustBtn"><i class="bi bi-sliders"></i> Adjust Settings &amp; Re-run</button>
+                        <button class="btn btn-link btn-sm text-muted" id="startOverBtn"><i class="bi bi-arrow-counterclockwise"></i> Start Over</button>
                     </div>
-                    <p class="text-muted mt-3" style="font-size:0.75rem;"><i class="bi bi-shield-lock"></i> File auto-deleted in 30 seconds</p>
+                    <p class="text-muted mt-3" style="font-size:0.75rem;"><i class="bi bi-shield-lock"></i> Processed locally — your file never left this device</p>
                 </div>
+            </div>
+
+            <!-- About This Tool -->
+            <div class="tool-about-card mt-4" id="toolAboutCard">
+                <h5 class="fw-bold mb-2"><i class="bi bi-info-circle"></i> About This Tool</h5>
+                <p id="toolAboutText" class="mb-3"></p>
+                <h6 class="fw-bold">How to use</h6>
+                <ol id="toolSteps" class="mb-0"></ol>
+                <div id="toolNote" class="tool-note d-none mt-3"></div>
             </div>
 
             <!-- Info Cards -->
