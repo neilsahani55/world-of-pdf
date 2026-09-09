@@ -1180,6 +1180,27 @@ body {
     }
 }
 
+/* ── Mobile footer alignment ── */
+@media (max-width: 767px) {
+    .site-footer .row > div { text-align: center; }
+    .footer-trust-row {
+        flex-wrap: nowrap !important;
+        justify-content: center;
+    }
+    .footer-trust-badge {
+        white-space: nowrap;
+        font-size: 0.68rem;
+        padding: 4px 8px;
+    }
+    .footer-heading { margin-top: 0.5rem; }
+    .footer-bottom .container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        text-align: center;
+    }
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-body); }
