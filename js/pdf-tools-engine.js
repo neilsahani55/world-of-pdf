@@ -71,7 +71,6 @@
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => document.querySelectorAll(s);
 
-    $('#breadcrumbName').textContent = tool.name;
     $('#toolTitle').textContent = tool.name;
     $('#toolDesc').textContent = tool.desc;
     $('#toolIcon').className = 'tool-hero-icon tool-icon--' + tool.color;

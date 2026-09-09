@@ -1,10 +1,29 @@
 /* ===========================================================
    Tool Page Styles
    =========================================================== */
-.breadcrumb-nav { font-size: 0.82rem; color: var(--text-muted); }
-.breadcrumb-nav a { color: var(--text-secondary); text-decoration: none; }
-.breadcrumb-nav a:hover { color: var(--accent); }
-.breadcrumb-nav span { margin: 0 4px; }
+/* Back-to-tools pill (replaces old breadcrumb) */
+.hero-back-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.15s ease;
+}
+.hero-back-pill:hover {
+    color: #fff;
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
 
 .tool-hero {
     padding: 20px 0 30px;
