@@ -1,6 +1,7 @@
 /* ===========================================================
-   PDF Merge Toolkit — Client-Side PDF Processing Engine
-   Uses pdf-lib for manipulation, PDF.js for rendering
+   World of PDF — Client-Side PDF Processing Engine
+   Uses pdf-lib for manipulation, PDF.js for rendering,
+   and BinUtils (binary-utils.js) for ZIP/BMP/TIFF/DOCX work.
    =========================================================== */
 
 (function () {
@@ -17,18 +18,18 @@
         'remove-pages':   { name: 'Remove Pages', desc: 'Delete specific pages from PDF', icon: 'bi-trash3', color: 'indigo', accept: '.pdf', btnText: 'Remove Pages', options: 'pages' },
         'extract-pages':  { name: 'Extract Pages', desc: 'Pull specific pages into a new PDF', icon: 'bi-file-earmark-minus', color: 'indigo', accept: '.pdf', btnText: 'Extract Pages', options: 'pages' },
         'image-to-pdf':   { name: 'Image to PDF', desc: 'Convert images to a single PDF', icon: 'bi-image', color: 'blue', accept: '.jpg,.jpeg,.png,.gif,.bmp,.webp', multiple: true, btnText: 'Convert to PDF' },
-        'word-to-pdf':    { name: 'Word to PDF', desc: 'Convert DOCX documents to PDF', icon: 'bi-file-earmark-word', color: 'blue', accept: '.doc,.docx,.txt,.rtf', btnText: 'Convert', options: 'textConvert' },
+        'word-to-pdf':    { name: 'Word to PDF', desc: 'Convert DOCX documents to PDF', icon: 'bi-file-earmark-word', color: 'blue', accept: '.docx,.txt,.rtf', btnText: 'Convert' },
         'text-to-pdf':    { name: 'Text to PDF', desc: 'Convert plain text files to PDF', icon: 'bi-file-text', color: 'gray', accept: '.txt,.csv,.log,.md', btnText: 'Convert to PDF' },
         'html-to-pdf':    { name: 'HTML to PDF', desc: 'Convert HTML files to PDF', icon: 'bi-filetype-html', color: 'blue', accept: '.html,.htm', btnText: 'Convert to PDF' },
         'markdown-to-pdf': { name: 'Markdown to PDF', desc: 'Convert Markdown to styled PDF', icon: 'bi-markdown', color: 'purple', accept: '.md,.markdown,.txt', btnText: 'Convert to PDF' },
         'excel-to-pdf':   { name: 'Excel to PDF', desc: 'Convert spreadsheets to PDF', icon: 'bi-file-earmark-excel', color: 'green', accept: '.csv,.tsv,.txt', btnText: 'Convert to PDF' },
-        'powerpoint-to-pdf': { name: 'PowerPoint to PDF', desc: 'Convert presentations to PDF', icon: 'bi-file-earmark-ppt', color: 'orange', accept: '.pptx,.ppt,.txt', btnText: 'Convert to PDF' },
+        'powerpoint-to-pdf': { name: 'PowerPoint to PDF', desc: 'Convert presentations to PDF', icon: 'bi-file-earmark-ppt', color: 'orange', accept: '.pptx,.txt', btnText: 'Convert to PDF' },
         'base64-to-pdf':  { name: 'Base64 to PDF', desc: 'Decode Base64 string to PDF', icon: 'bi-code-slash', color: 'cyan', accept: '.txt', btnText: 'Decode to PDF', options: 'base64input' },
         'pdf-to-png':     { name: 'PDF to PNG', desc: 'High-quality PNG export', icon: 'bi-filetype-png', color: 'green', accept: '.pdf', btnText: 'Convert to PNG' },
         'pdf-to-jpg':     { name: 'PDF to JPG', desc: 'Convert PDF pages to JPG', icon: 'bi-filetype-jpg', color: 'amber', accept: '.pdf', btnText: 'Convert to JPG' },
         'pdf-to-tiff':    { name: 'PDF to TIFF', desc: 'Convert to TIFF format', icon: 'bi-filetype-tiff', color: 'purple', accept: '.pdf', btnText: 'Convert to TIFF' },
         'pdf-to-bmp':     { name: 'PDF to BMP', desc: 'Convert to BMP format', icon: 'bi-filetype-bmp', color: 'cyan', accept: '.pdf', btnText: 'Convert to BMP' },
-        'pdf-to-word':    { name: 'PDF to Word', desc: 'Extract text into a DOCX-compatible file', icon: 'bi-file-earmark-word', color: 'blue', accept: '.pdf', btnText: 'Extract Text' },
+        'pdf-to-word':    { name: 'PDF to Word', desc: 'Convert PDF text to an editable Word (.docx) file', icon: 'bi-file-earmark-word', color: 'blue', accept: '.pdf', btnText: 'Convert to Word' },
         'pdf-to-excel':   { name: 'PDF to Excel', desc: 'Extract data into spreadsheet format', icon: 'bi-file-earmark-excel', color: 'green', accept: '.pdf', btnText: 'Extract to CSV' },
         'pdf-to-powerpoint': { name: 'PDF to PowerPoint', desc: 'Convert pages to presentation', icon: 'bi-file-earmark-ppt', color: 'orange', accept: '.pdf', btnText: 'Convert' },
         'pdf-to-text':    { name: 'PDF to Text', desc: 'Extract all text from PDF', icon: 'bi-file-text', color: 'gray', accept: '.pdf', btnText: 'Extract Text' },
@@ -49,7 +50,7 @@
         'protect-pdf':    { name: 'Protect PDF', desc: 'Add password encryption', icon: 'bi-lock-fill', color: 'indigo', accept: '.pdf', btnText: 'Protect', options: 'protect' },
         'unlock-pdf':     { name: 'Unlock PDF', desc: 'Remove password protection', icon: 'bi-unlock-fill', color: 'green', accept: '.pdf', btnText: 'Unlock', options: 'unlock' },
         'sign-pdf':       { name: 'Sign PDF', desc: 'Add your signature to any page', icon: 'bi-pen-fill', color: 'blue', accept: '.pdf', btnText: 'Add Signature', options: 'sign' },
-        'extract-images': { name: 'Extract Images', desc: 'Pull all embedded images from PDF', icon: 'bi-images', color: 'amber', accept: '.pdf', btnText: 'Extract Images' },
+        'extract-images': { name: 'Extract Images', desc: 'Save each PDF page as a PNG image', icon: 'bi-images', color: 'amber', accept: '.pdf', btnText: 'Extract Images' },
         'extract-links':  { name: 'Extract Links', desc: 'Find all URLs in your PDF', icon: 'bi-link-45deg', color: 'blue', accept: '.pdf', btnText: 'Extract Links' },
         'pdf-info':       { name: 'PDF Info', desc: 'View page count, metadata & details', icon: 'bi-info-circle', color: 'indigo', accept: '.pdf', btnText: 'Get Info' },
         'repair-pdf':     { name: 'Repair PDF', desc: 'Fix corrupted or damaged PDF files', icon: 'bi-wrench', color: 'orange', accept: '.pdf', btnText: 'Repair' },
@@ -65,7 +66,7 @@
     if (!tool) return;
 
     /* ── Populate Page ── */
-    document.title = tool.name + ' - PDF Merge Toolkit';
+    document.title = tool.name + ' - World of PDF';
     document.querySelector('meta[name="description"]')?.setAttribute('content', tool.desc);
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => document.querySelectorAll(s);
@@ -328,24 +329,24 @@
             'remove-pages': processRemovePages,
             'extract-pages': processExtractPages,
             'image-to-pdf': processImageToPdf,
-            'text-to-pdf': processTextToPdf,
-            'html-to-pdf': processTextToPdf,
-            'markdown-to-pdf': processTextToPdf,
-            'word-to-pdf': processTextToPdf,
-            'excel-to-pdf': processTextToPdf,
-            'powerpoint-to-pdf': processTextToPdf,
+            'text-to-pdf': processDocumentToPdf,
+            'html-to-pdf': processDocumentToPdf,
+            'markdown-to-pdf': processDocumentToPdf,
+            'word-to-pdf': processDocumentToPdf,
+            'excel-to-pdf': processDocumentToPdf,
+            'powerpoint-to-pdf': processDocumentToPdf,
             'base64-to-pdf': processBase64ToPdf,
             'pdf-to-png': () => processPdfToImage('png'),
             'pdf-to-jpg': () => processPdfToImage('jpeg'),
-            'pdf-to-tiff': () => processPdfToImage('png'),
-            'pdf-to-bmp': () => processPdfToImage('png'),
+            'pdf-to-tiff': () => processPdfToImage('tiff'),
+            'pdf-to-bmp': () => processPdfToImage('bmp'),
             'pdf-to-text': processPdfToText,
-            'pdf-to-word': processPdfToText,
+            'pdf-to-word': processPdfToWord,
             'pdf-to-html': processPdfToHtml,
             'pdf-to-markdown': processPdfToText,
             'pdf-to-xml': processPdfToXml,
-            'pdf-to-csv': processPdfToText,
-            'pdf-to-excel': processPdfToText,
+            'pdf-to-csv': processPdfToCsv,
+            'pdf-to-excel': processPdfToCsv,
             'pdf-to-powerpoint': processPdfToText,
             'pdf-to-base64': processPdfToBase64,
             'compress-pdf': processCompress,
@@ -396,8 +397,6 @@
         const mode = $('#optSplitMode')?.value || 'all';
 
         if (mode === 'all') {
-            // Create a zip-like download of all pages as separate PDFs
-            // For simplicity, merge all into one with page breaks labeled
             const results = [];
             for (let i = 0; i < total; i++) {
                 setProgress(10 + (80 * i / total));
@@ -406,15 +405,12 @@
                 doc.addPage(page);
                 results.push(await doc.save());
             }
-            // If single page, download directly
             if (results.length === 1) {
                 setResult(new Blob([results[0]], { type: 'application/pdf' }), 'page-1.pdf');
             } else {
-                // Download as multiple files by creating a combined notification
-                setResult(new Blob([results[0]], { type: 'application/pdf' }), 'page-1.pdf');
-                // Store extra pages for sequential download
-                window._splitResults = results;
-                $('#downloadInfo').textContent = total + ' pages split into separate PDFs. Click to download page 1.';
+                const zip = BinUtils.zipStore(results.map((r, i) => ({ name: 'page-' + (i + 1) + '.pdf', data: new Uint8Array(r) })));
+                setResult(new Blob([zip], { type: 'application/zip' }), 'split-pages.zip');
+                $('#downloadInfo').textContent = 'split-pages.zip — ' + total + ' PDFs (' + fmtSize(zip.length) + ')';
             }
         } else {
             const rangeStr = $('#optSplitRange')?.value || '';
@@ -499,15 +495,33 @@
     }
 
     /* ─── IMAGE TO PDF ─── */
+
+    // Decode any browser-supported image (gif/bmp/webp/...) to PNG bytes via canvas
+    function imageFileToPngBytes(file) {
+        return new Promise((resolve, reject) => {
+            const url = URL.createObjectURL(file);
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+                canvas.getContext('2d').drawImage(img, 0, 0);
+                URL.revokeObjectURL(url);
+                canvas.toBlob(b => b ? b.arrayBuffer().then(resolve) : reject(new Error('Could not convert image')), 'image/png');
+            };
+            img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not load image: ' + file.name)); };
+            img.src = url;
+        });
+    }
+
     async function processImageToPdf() {
         const doc = await PDFDocument.create();
         for (let i = 0; i < selectedFiles.length; i++) {
             setProgress(10 + (80 * i / selectedFiles.length));
-            const bytes = await readFile(selectedFiles[i]);
             const name = selectedFiles[i].name.toLowerCase();
             let img;
-            if (name.endsWith('.png')) img = await doc.embedPng(bytes);
-            else img = await doc.embedJpg(bytes);
+            if (name.endsWith('.png')) img = await doc.embedPng(await readFile(selectedFiles[i]));
+            else if (name.endsWith('.jpg') || name.endsWith('.jpeg')) img = await doc.embedJpg(await readFile(selectedFiles[i]));
+            else img = await doc.embedPng(await imageFileToPngBytes(selectedFiles[i]));
             const { width, height } = img.scale(1);
             const page = doc.addPage([width, height]);
             page.drawImage(img, { x: 0, y: 0, width, height });
@@ -516,9 +530,34 @@
         setResult(new Blob([out], { type: 'application/pdf' }), 'images.pdf');
     }
 
-    /* ─── TEXT / MD / HTML / DOCX to PDF ─── */
-    async function processTextToPdf() {
-        const text = await readFileText(selectedFiles[0]);
+    /* ─── DOCUMENT (TXT / MD / HTML / RTF / DOCX / PPTX / CSV) to PDF ─── */
+    async function processDocumentToPdf() {
+        const file = selectedFiles[0];
+        const name = file.name.toLowerCase();
+        let text;
+        if (name.endsWith('.docx')) {
+            text = await BinUtils.docxToText(new Uint8Array(await readFile(file)));
+        } else if (name.endsWith('.pptx')) {
+            text = await BinUtils.pptxToText(new Uint8Array(await readFile(file)));
+        } else if (name.endsWith('.html') || name.endsWith('.htm')) {
+            text = BinUtils.htmlToText(await readFileText(file));
+        } else if (name.endsWith('.rtf')) {
+            text = BinUtils.rtfToText(await readFileText(file));
+        } else if (name.endsWith('.doc') || name.endsWith('.ppt')) {
+            throw new Error('Legacy .doc/.ppt binary files are not supported. Please save the file as .docx/.pptx and try again.');
+        } else {
+            text = await readFileText(file);
+        }
+        await renderTextToPdf(text);
+    }
+
+    async function renderTextToPdf(text) {
+        // Helvetica is WinAnsi-encoded: normalize typographic chars, replace the rest
+        text = text.replace(/\r\n?/g, '\n').replace(/\t/g, '    ')
+            .replace(/[‘’ʼ]/g, "'").replace(/[“”]/g, '"')
+            .replace(/[–—]/g, '-').replace(/…/g, '...')
+            .replace(/[\u00A0\u2000-\u200B\u202F]/g, ' ')
+            .replace(/[^\n\x20-\x7E¡-ÿ]/g, '?');
         const doc = await PDFDocument.create();
         const font = await doc.embedFont(StandardFonts.Helvetica);
         const fontSize = 11;
@@ -526,13 +565,25 @@
         const lineHeight = fontSize * 1.4;
         const pageW = 595.28; const pageH = 841.89; // A4
         const maxW = pageW - margin * 2;
+        // Hard-break words wider than a full line so wrapping always terminates
+        const breakLong = w => {
+            if (font.widthOfTextAtSize(w, fontSize) <= maxW) return [w];
+            const parts = [];
+            let cur = '';
+            for (const ch of w) {
+                if (font.widthOfTextAtSize(cur + ch, fontSize) > maxW) { parts.push(cur); cur = ch; }
+                else cur += ch;
+            }
+            if (cur) parts.push(cur);
+            return parts;
+        };
         const lines = text.split('\n');
         let page = doc.addPage([pageW, pageH]);
         let y = pageH - margin;
 
         for (const rawLine of lines) {
             // Word-wrap
-            const words = rawLine.split(' ');
+            const words = rawLine.split(' ').flatMap(breakLong);
             let currentLine = '';
             for (const word of words) {
                 const test = currentLine ? currentLine + ' ' + word : word;
@@ -557,58 +608,119 @@
     async function processBase64ToPdf() {
         let b64 = $('#optBase64')?.value || '';
         if (!b64.trim() && selectedFiles.length) b64 = await readFileText(selectedFiles[0]);
-        b64 = b64.replace(/^data:[^;]+;base64,/, '').trim();
-        const binary = atob(b64);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        if (!b64.trim()) throw new Error('Please paste a Base64 string or choose a .txt file containing one.');
+        let bytes;
+        try { bytes = BinUtils.base64ToBytes(b64); }
+        catch (e) { throw new Error('That does not look like valid Base64 data.'); }
         setResult(new Blob([bytes], { type: 'application/pdf' }), 'decoded.pdf');
+        const isPdf = bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46; // %PDF
+        if (!isPdf) $('#downloadInfo').textContent = 'decoded.pdf (' + fmtSize(bytes.length) + ') — Warning: decoded data does not start with a PDF header.';
     }
 
-    /* ─── PDF TO IMAGE (PNG/JPG) ─── */
+    /* ─── PDF TO IMAGE (PNG/JPG/TIFF/BMP) ─── */
+
+    function renderPdfPage(pdf, pageNum, scale) {
+        return pdf.getPage(pageNum).then(async page => {
+            const vp = page.getViewport({ scale: scale || 2 });
+            const canvas = document.createElement('canvas');
+            canvas.width = vp.width; canvas.height = vp.height;
+            const ctx = canvas.getContext('2d');
+            await page.render({ canvasContext: ctx, viewport: vp }).promise;
+            return { canvas, ctx };
+        });
+    }
+
+    function canvasToBytes(canvas, ctx, format) {
+        if (format === 'bmp') {
+            const d = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            return Promise.resolve(BinUtils.bmpEncode(canvas.width, canvas.height, d.data));
+        }
+        if (format === 'tiff') {
+            const d = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            return Promise.resolve(BinUtils.tiffEncode(canvas.width, canvas.height, d.data));
+        }
+        return new Promise((resolve, reject) => {
+            canvas.toBlob(b => {
+                if (!b) return reject(new Error('Image encoding failed'));
+                b.arrayBuffer().then(buf => resolve(new Uint8Array(buf)));
+            }, 'image/' + format, 0.92);
+        });
+    }
+
+    const IMG_EXT = { png: 'png', jpeg: 'jpg', tiff: 'tiff', bmp: 'bmp' };
+    const IMG_MIME = { png: 'image/png', jpeg: 'image/jpeg', tiff: 'image/tiff', bmp: 'image/bmp' };
+
     async function processPdfToImage(format) {
         const bytes = await readFile(selectedFiles[0]);
         const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
         const total = pdf.numPages;
+        const ext = IMG_EXT[format];
+        const pages = [];
+        for (let i = 1; i <= total; i++) {
+            setProgress(10 + (80 * i / total));
+            const { canvas, ctx } = await renderPdfPage(pdf, i);
+            pages.push(await canvasToBytes(canvas, ctx, format));
+        }
         if (total === 1) {
-            const page = await pdf.getPage(1);
-            const scale = 2;
-            const vp = page.getViewport({ scale });
-            const canvas = document.createElement('canvas');
-            canvas.width = vp.width; canvas.height = vp.height;
-            await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-            canvas.toBlob(blob => {
-                setResult(blob, 'page-1.' + (format === 'jpeg' ? 'jpg' : 'png'));
-            }, 'image/' + format, 0.92);
+            setResult(new Blob([pages[0]], { type: IMG_MIME[format] }), 'page-1.' + ext);
         } else {
-            // Multiple pages: download first page, notify user
-            const page = await pdf.getPage(1);
-            const scale = 2;
-            const vp = page.getViewport({ scale });
-            const canvas = document.createElement('canvas');
-            canvas.width = vp.width; canvas.height = vp.height;
-            await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-            canvas.toBlob(blob => {
-                setResult(blob, 'page-1.' + (format === 'jpeg' ? 'jpg' : 'png'));
-                $('#downloadInfo').textContent = total + ' pages. Downloading page 1. Repeat for more pages.';
-            }, 'image/' + format, 0.92);
+            const zip = BinUtils.zipStore(pages.map((p, i) => ({ name: 'page-' + (i + 1) + '.' + ext, data: p })));
+            setResult(new Blob([zip], { type: 'application/zip' }), 'pages-' + ext + '.zip');
+            $('#downloadInfo').textContent = 'pages-' + ext + '.zip — ' + total + ' images (' + fmtSize(zip.length) + ')';
         }
         setProgress(90);
     }
 
-    /* ─── PDF TO TEXT ─── */
+    /* ─── PDF TO TEXT / MARKDOWN ─── */
+
+    // Extract a page's text as visual lines (grouped by y, ordered by x)
+    async function pageTextLines(pdf, pageNum) {
+        const page = await pdf.getPage(pageNum);
+        const content = await page.getTextContent();
+        return BinUtils.itemsToCsvRows(content.items).map(cells => cells.join(' '));
+    }
+
     async function processPdfToText() {
         const bytes = await readFile(selectedFiles[0]);
         const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+        const isMd = slug === 'pdf-to-markdown';
         let allText = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+            setProgress(10 + (80 * i / pdf.numPages));
+            const lines = await pageTextLines(pdf, i);
+            allText += (isMd ? '## Page ' + i + '\n\n' : '--- Page ' + i + ' ---\n') + lines.join('\n') + '\n\n';
+        }
+        const ext = isMd ? 'md' : 'txt';
+        setResult(new Blob([allText], { type: 'text/plain' }), 'extracted.' + ext);
+    }
+
+    /* ─── PDF TO WORD (.docx) ─── */
+    async function processPdfToWord() {
+        const bytes = await readFile(selectedFiles[0]);
+        const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+        const lines = [];
+        for (let i = 1; i <= pdf.numPages; i++) {
+            setProgress(10 + (80 * i / pdf.numPages));
+            lines.push(...await pageTextLines(pdf, i));
+            if (i < pdf.numPages) lines.push('');
+        }
+        const docx = BinUtils.docxFromLines(lines.length ? lines : ['(No extractable text found in this PDF)']);
+        setResult(new Blob([docx], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }), 'converted.docx');
+    }
+
+    /* ─── PDF TO CSV / EXCEL ─── */
+    async function processPdfToCsv() {
+        const bytes = await readFile(selectedFiles[0]);
+        const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+        const allRows = [];
         for (let i = 1; i <= pdf.numPages; i++) {
             setProgress(10 + (80 * i / pdf.numPages));
             const page = await pdf.getPage(i);
             const content = await page.getTextContent();
-            const text = content.items.map(item => item.str).join(' ');
-            allText += '--- Page ' + i + ' ---\n' + text + '\n\n';
+            allRows.push(...BinUtils.itemsToCsvRows(content.items));
         }
-        const ext = slug.includes('csv') ? 'csv' : slug.includes('markdown') || slug.includes('md') ? 'md' : slug.includes('word') ? 'txt' : 'txt';
-        setResult(new Blob([allText], { type: 'text/plain' }), 'extracted.' + ext);
+        const csv = BinUtils.rowsToCsv(allRows);
+        setResult(new Blob(['﻿' + csv], { type: 'text/csv' }), 'extracted.csv');
     }
 
     /* ─── PDF TO HTML ─── */
@@ -645,7 +757,7 @@
     /* ─── PDF TO BASE64 ─── */
     async function processPdfToBase64() {
         const bytes = await readFile(selectedFiles[0]);
-        const b64 = btoa(String.fromCharCode(...new Uint8Array(bytes)));
+        const b64 = BinUtils.bytesToBase64(new Uint8Array(bytes));
         setResult(new Blob([b64], { type: 'text/plain' }), 'encoded.txt');
     }
 
@@ -854,22 +966,24 @@
         setResult(new Blob([out], { type: 'application/pdf' }), 'signed.pdf');
     }
 
-    /* ─── EXTRACT IMAGES ─── */
+    /* ─── EXTRACT IMAGES (renders each page to PNG) ─── */
     async function processExtractImages() {
-        // Render first page and extract as image for demo
         const bytes = await readFile(selectedFiles[0]);
         const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
-        const page = await pdf.getPage(1);
-        const scale = 2;
-        const vp = page.getViewport({ scale });
-        const canvas = document.createElement('canvas');
-        canvas.width = vp.width; canvas.height = vp.height;
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-        setProgress(80);
-        canvas.toBlob(blob => {
-            setResult(blob, 'extracted-page1.png');
-            $('#downloadInfo').textContent = 'Extracted rendered page as image. For embedded image extraction, a server-side tool is recommended.';
-        }, 'image/png');
+        const total = pdf.numPages;
+        const pages = [];
+        for (let i = 1; i <= total; i++) {
+            setProgress(10 + (80 * i / total));
+            const { canvas, ctx } = await renderPdfPage(pdf, i);
+            pages.push(await canvasToBytes(canvas, ctx, 'png'));
+        }
+        if (total === 1) {
+            setResult(new Blob([pages[0]], { type: 'image/png' }), 'page-1.png');
+        } else {
+            const zip = BinUtils.zipStore(pages.map((p, i) => ({ name: 'page-' + (i + 1) + '.png', data: p })));
+            setResult(new Blob([zip], { type: 'application/zip' }), 'page-images.zip');
+            $('#downloadInfo').textContent = 'page-images.zip — ' + total + ' PNGs (' + fmtSize(zip.length) + ')';
+        }
     }
 
     /* ─── EXTRACT LINKS ─── */

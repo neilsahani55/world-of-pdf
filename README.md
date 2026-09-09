@@ -1,8 +1,10 @@
-# PDF Merge Toolkit
+# World of PDF
 
-A comprehensive, free, browser-based PDF manipulation platform with **48+ tools**. No sign-up required. 100% client-side processing — your files never leave your device.
+A comprehensive, free, browser-based PDF platform with **48+ tools**. No sign-up required. 100% client-side processing — your files never leave your device.
 
-![PDF Merge Toolkit](https://img.shields.io/badge/Tools-48%2B-6366f1?style=for-the-badge)
+**Live site:** [world-of-pdf.vercel.app](https://world-of-pdf.vercel.app) (hosted on Vercel)
+
+![World of PDF](https://img.shields.io/badge/Tools-48%2B-6366f1?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Live-brightgreen?style=for-the-badge)
 
@@ -15,67 +17,120 @@ A comprehensive, free, browser-based PDF manipulation platform with **48+ tools*
 - **No Watermarks** — Clean output on every tool
 - **10 Color Themes** — Light, Dark, Ocean Blue, Forest Green, Sunset, Rose, Midnight, Lavender, Charcoal, Emerald
 - **Fully Responsive** — Works on desktop, tablet, and mobile
-- **Search & Filter** — Find any tool instantly with search and category tabs
+- **Tool-to-Tool Navigation** — Full category menus on every page, plus search & filter on the homepage
 
-## Tools Available
+## How Each Tool Works
 
-### Merge & Organize (6)
-Merge PDF, Split PDF, Organize PDF, Rotate PDF, Remove Pages, Extract Pages
+### Merge & Organize
+| Tool | How it works |
+|---|---|
+| **Merge PDF** | Copies every page from your selected PDFs (drag to reorder) into one new document with pdf-lib |
+| **Split PDF** | Saves each page as its own PDF and bundles them into a ZIP, or extracts a custom page range into one PDF |
+| **Organize PDF** | Rebuilds the document with pages reversed, odd/even only, or in any custom order you type |
+| **Rotate PDF** | Adds 90°/180°/270° to the rotation of all pages or just the pages you pick |
+| **Remove Pages** | Copies every page *except* the ones you list into a new PDF |
+| **Extract Pages** | Copies only the pages you list into a new PDF |
 
-### Convert to PDF (8)
-Image to PDF, HTML to PDF, Word to PDF, Excel to PDF, PowerPoint to PDF, Text to PDF, Markdown to PDF, Base64 to PDF
+### Convert to PDF
+| Tool | How it works |
+|---|---|
+| **Image to PDF** | Embeds JPG/PNG directly; GIF/BMP/WebP are decoded through a canvas first — one page per image |
+| **Word to PDF** | Unzips the .docx in the browser, decompresses `document.xml`, extracts the text runs, and typesets them onto A4 pages (also accepts .txt/.rtf) |
+| **PowerPoint to PDF** | Unzips the .pptx and extracts the text of each slide into a paginated PDF |
+| **Excel to PDF** | Renders CSV/TSV text content onto A4 pages with word-wrapping |
+| **Text to PDF** | Typesets plain text with automatic word-wrap and page breaks |
+| **HTML to PDF** | Strips tags/scripts/styles from the HTML and converts the readable text to PDF |
+| **Markdown to PDF** | Converts the Markdown source text to a paginated PDF |
+| **Base64 to PDF** | Decodes a pasted (or uploaded) Base64 string back into a binary PDF, with a header sanity-check |
 
-### PDF to Image (4)
-PDF to PNG, PDF to JPG, PDF to TIFF, PDF to BMP
+### Convert from PDF
+| Tool | How it works |
+|---|---|
+| **PDF to PNG / JPG** | Renders every page to a canvas at 2× scale via PDF.js; single page downloads directly, multiple pages come as a ZIP |
+| **PDF to TIFF** | Renders pages to canvas, then writes real uncompressed RGB TIFF files byte-by-byte |
+| **PDF to BMP** | Renders pages to canvas, then writes real 24-bit BMP files byte-by-byte |
+| **PDF to Word** | Extracts text lines (grouped by position) and packages them into a genuine .docx (OOXML) file |
+| **PDF to Excel / CSV** | Uses each text fragment's x/y coordinates to reconstruct rows and columns, then writes proper CSV |
+| **PDF to Text** | Extracts all text via PDF.js, grouped into visual lines, one section per page |
+| **PDF to HTML** | Wraps the extracted text of each page in a styled standalone HTML document |
+| **PDF to Markdown** | Extracts text with `## Page N` headings per page |
+| **PDF to XML** | Emits an XML tree with one `<page>` element per page and `<text>` nodes per fragment |
+| **PDF to PowerPoint** | Extracts each page's text into a per-page text outline |
+| **PDF to Base64** | Encodes the PDF bytes to a Base64 string (chunked, so large files work) |
 
-### PDF to Document (9)
-PDF to Word, PDF to Excel, PDF to PowerPoint, PDF to Text, PDF to HTML, PDF to Markdown, PDF to XML, PDF to CSV, PDF to Base64
+### Edit & Enhance
+| Tool | How it works |
+|---|---|
+| **Compress PDF** | Re-saves the document with pdf-lib object streams enabled (lossless; savings vary by file) |
+| **Watermark** | Draws your text on every page with custom size, opacity, and angle |
+| **Page Numbers** | Stamps configurable page numbers (position, start number, format) on each page |
+| **Crop PDF** | Sets each page's crop box inward by the margins you specify |
+| **Resize PDF** | Copies pages and sets their media box to A3/A4/A5/Letter/Legal |
+| **Grayscale** | Renders each page to canvas, converts pixels to luminance grayscale, re-embeds as image pages |
+| **Flatten PDF** | Bakes interactive form fields into the static page content |
+| **Metadata** | Rewrites title, author, subject, and keywords |
+| **PDF/A** | Flattens forms and re-saves for archival use |
+| **Edit PDF** | *Coming soon* |
 
-### Edit & Enhance (10)
-Compress PDF, Watermark, Page Numbers, Edit PDF*, Crop PDF, Resize PDF, Grayscale, Flatten PDF, Metadata, PDF/A
+### Security
+| Tool | How it works |
+|---|---|
+| **Protect PDF** | Re-saves the PDF; note that true AES encryption isn't possible client-side with pdf-lib — the page says so honestly |
+| **Unlock PDF** | Loads with `ignoreEncryption` and re-saves without the password (for PDFs you own) |
+| **Sign PDF** | Lets you draw a signature on canvas (mouse or touch) and stamps it on the first/last/all pages |
+| **Redact PDF** | *Coming soon* |
 
-### Security (4)
-Protect PDF, Unlock PDF, Redact PDF*, Sign PDF
-
-### Extract & Utility (6)
-Extract Images, Extract Links, PDF Info, Repair PDF, Compare PDF, OCR PDF*
-
-> *\* = Coming Soon*
+### Extract & Utility
+| Tool | How it works |
+|---|---|
+| **Extract Images** | Renders every page as a PNG and delivers them in a ZIP |
+| **Extract Links** | Walks each page's link annotations and lists every URL with its page number |
+| **PDF Info** | Reads page count, metadata, dates, and per-page dimensions |
+| **Repair PDF** | Re-parses and re-serializes the file, which fixes many structural issues |
+| **Compare PDF** | Extracts text of both files page-by-page and reports identical/different per page |
+| **OCR PDF** | *Coming soon* |
 
 ## Tech Stack
 
 | Technology | Purpose |
 |---|---|
-| **HTML5 / CSS3 / JS** | Frontend |
+| **HTML5 / CSS3 / JS** | Frontend — no framework, no build step |
 | **Bootstrap 5** | Layout & responsive grid |
 | **Bootstrap Icons** | Icon system |
-| **pdf-lib** | Client-side PDF manipulation |
+| **pdf-lib** | Client-side PDF creation & manipulation |
 | **PDF.js** | PDF rendering & text extraction |
+| **binary-utils.js** | In-house zero-dependency ZIP/BMP/TIFF/DOCX/CSV encoders (Node-testable) |
 | **Google Fonts (Inter)** | Typography |
 
 ## Project Structure
 
 ```
-pdf-merge-toolkit/
-├── index.html              # Homepage with all tools grid
+world-of-pdf/
+├── index.html              # Homepage with all-tools grid, search, category tabs
+├── about.html              # About page
+├── contact.html            # Contact page
+├── privacy.html            # Privacy policy
+├── terms.html              # Terms of use
 ├── favicon.svg             # Site favicon
+├── LICENSE                 # MIT license
 ├── css/
 │   ├── bootstrap.min.css   # Bootstrap 5
 │   ├── bootstrap-icons.css # Bootstrap Icons
+│   ├── fonts/              # Icon font files
 │   ├── style.css           # Custom styles + 10 themes
 │   └── tool-page.css       # Tool page styles
-│   └── fonts/              # Bootstrap Icons font files
 ├── js/
 │   ├── bootstrap.bundle.min.js  # Bootstrap JS
-│   ├── app.js                   # Homepage logic (tabs, search, mega-menu, themes)
-│   └── pdf-tools-engine.js      # PDF processing engine for all 48+ tools
+│   ├── app.js                   # Homepage logic (grid, tabs, search, menus, themes)
+│   ├── binary-utils.js          # ZIP / BMP / TIFF / DOCX / CSV binary helpers
+│   └── pdf-tools-engine.js      # Shared engine driving all 48 tool pages
 └── tools/
-    ├── tool-template.html       # Base template for tool pages
-    ├── merge-pdf.html           # Individual tool pages (48 total)
-    ├── split-pdf.html
-    ├── compress-pdf.html
-    └── ... (48 tool pages)
+    ├── tool-template.html       # Base template (all tool pages are generated from it)
+    ├── merge-pdf.html           # 48 individual tool pages
+    └── ...
 ```
+
+Every tool page is identical to `tool-template.html` except its `<title>`/meta description. The engine reads the page's URL slug, looks it up in its `TOOLS` map, and wires up the upload flow, options panel, and processor for that tool.
 
 ## Getting Started
 
@@ -83,10 +138,10 @@ pdf-merge-toolkit/
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/pdf-merge-toolkit.git
+git clone https://github.com/neilsahani55/world-of-pdf.git
 
 # Navigate to the project
-cd pdf-merge-toolkit
+cd world-of-pdf
 
 # Serve with any static server
 npx serve .
@@ -95,29 +150,28 @@ npx serve .
 # http://localhost:3000
 ```
 
-### Deploy to Netlify
+No build step needed — it's a static site.
+
+### Deploy to Vercel
+
+The live site runs on Vercel. To deploy your own:
 
 1. Push the repository to GitHub
-2. Go to [Netlify](https://app.netlify.com)
-3. Click **"Add new site"** > **"Import an existing project"**
-4. Connect your GitHub repo
-5. Build settings:
-   - **Build command:** *(leave empty)*
-   - **Publish directory:** `.`
-6. Click **Deploy**
-
-No build step needed — it's a static site.
+2. Go to [vercel.com](https://vercel.com) and click **Add New → Project**
+3. Import the GitHub repo
+4. Framework preset: **Other** — leave build command and output directory empty
+5. Click **Deploy**
 
 ## How It Works
 
-1. **Upload** — Select or drag & drop your PDF/document (up to 50 MB)
+1. **Upload** — Select or drag & drop your file (up to 50 MB)
 2. **Configure** — Set tool-specific options (rotation angle, watermark text, page ranges, etc.)
-3. **Process** — Files are processed entirely in your browser using pdf-lib
-4. **Download** — Download the result instantly. No files are stored anywhere.
+3. **Process** — Files are processed entirely in your browser using pdf-lib / PDF.js
+4. **Download** — Download the result instantly. Nothing is stored anywhere.
 
 ## Theme System
 
-The site includes 10 fully-designed color themes, all using CSS custom properties for seamless switching:
+Ten fully-designed color themes driven by CSS custom properties, persisted in localStorage:
 
 | Theme | Primary Color |
 |---|---|
@@ -135,9 +189,11 @@ The site includes 10 fully-designed color themes, all using CSS custom propertie
 ## Browser Support
 
 - Chrome 90+
-- Firefox 90+
-- Safari 15+
+- Firefox 113+
+- Safari 16.4+
 - Edge 90+
+
+(Firefox/Safari minimums are set by the `DecompressionStream` API used for reading .docx/.pptx files; every other tool works on older versions too.)
 
 ## Developer
 

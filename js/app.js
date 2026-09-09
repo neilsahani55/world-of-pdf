@@ -1,5 +1,5 @@
 /* ===========================================================
-   PDF Merge Toolkit — App JavaScript
+   World of PDF — App JavaScript
    =========================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {

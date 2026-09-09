@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About World of PDF — 48+ free, private, browser-based PDF tools.">
+    <title>About Us - World of PDF</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/tool-page.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand sticky-top px-3 z-3 main-nav">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2 me-3 text-decoration-none" href="index.html">
+            <div class="brand-name-wrap">
+                <div class="brand-name" style="font-size:1.1rem;">World of <span class="brand-accent">PDF</span></div>
+                <div class="brand-sub">48+ free tools &middot; no sign-up</div>
+            </div>
+        </a>
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <a href="index.html#toolsSection" class="nav-link-btn me-2"><i class="bi bi-grid-3x3-gap-fill"></i> All Tools</a>
+            <div class="dropdown theme-dropdown">
+                <button class="nav-icon-btn" id="themeToggleBtn" title="Change theme"><i class="bi bi-palette-fill"></i></button>
+                <div class="dropdown-menu dropdown-menu-end theme-menu" id="themeMenu">
+                    <button class="theme-option active" data-theme="light"><span class="theme-dot" style="background:#f8fafc;border:1px solid #d1d5db"></span> Light</button>
+                    <button class="theme-option" data-theme="dark"><span class="theme-dot" style="background:#0b0f19"></span> Dark</button>
+                    <button class="theme-option" data-theme="ocean"><span class="theme-dot" style="background:#2563eb"></span> Ocean Blue</button>
+                    <button class="theme-option" data-theme="forest"><span class="theme-dot" style="background:#16a34a"></span> Forest Green</button>
+                    <button class="theme-option" data-theme="sunset"><span class="theme-dot" style="background:#ea580c"></span> Sunset</button>
+                    <button class="theme-option" data-theme="rose"><span class="theme-dot" style="background:#e11d48"></span> Rose</button>
+                    <button class="theme-option" data-theme="midnight"><span class="theme-dot" style="background:#0f172a"></span> Midnight</button>
+                    <button class="theme-option" data-theme="lavender"><span class="theme-dot" style="background:#9333ea"></span> Lavender</button>
+                    <button class="theme-option" data-theme="charcoal"><span class="theme-dot" style="background:#18181b"></span> Charcoal</button>
+                    <button class="theme-option" data-theme="emerald"><span class="theme-dot" style="background:#10b981"></span> Emerald</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="tool-main">
+    <section class="tool-hero text-center">
+        <div class="container">
+            <nav class="breadcrumb-nav mb-2">
+                <a href="index.html">Home</a> <span>/</span> <span>About Us</span>
+            </nav>
+            <h1 class="fw-bold mb-1">About Us</h1>
+        </div>
+    </section>
+    <section class="tool-workspace">
+        <div class="container" style="max-width:800px;">
+            <div class="workspace-card">
+
+                <p><strong>World of PDF</strong> is a free collection of 48+ PDF tools that run entirely in your web browser. Merge, split, compress, convert, watermark, sign — all without creating an account or installing software.</p>
+                <p>What makes World of PDF different is simple: <strong>your files never leave your device</strong>. Every tool uses client-side JavaScript (powered by the open-source pdf-lib and PDF.js libraries) to process files locally in your browser. There is no upload server, no storage bucket, and no processing queue — which also means there is nothing for us to keep, leak, or sell.</p>
+                <h5 class="fw-bold mt-4">Why we built this</h5>
+                <p>Most online PDF services upload your documents to their servers and put limits, watermarks, or paywalls in front of basic operations. We believe simple document tasks should be free, fast, and private.</p>
+                <h5 class="fw-bold mt-4">The developer</h5>
+                <p>World of PDF is developed and maintained by <strong>Neel Sahani</strong>.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer mt-auto">
+    <div class="footer-bottom">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center py-3">
+            <span>&copy; 2026 World of PDF &middot; Your PDF Editor. Developed by <strong>Neel Sahani</strong></span>
+            <div class="d-flex gap-3">
+                <a href="privacy.html" class="footer-link">Privacy</a>
+                <a href="terms.html" class="footer-link">Terms</a>
+                <a href="about.html" class="footer-link">About</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
