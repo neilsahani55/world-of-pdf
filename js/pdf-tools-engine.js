@@ -102,6 +102,32 @@
     $('#themeToggleBtn')?.addEventListener('click', e => { e.stopPropagation(); $('#themeMenu').classList.toggle('show'); });
     document.addEventListener('click', e => { if (!e.target.closest('.theme-dropdown')) $('#themeMenu')?.classList.remove('show'); });
 
+    /* ── Mobile Menu (same behavior as homepage) ── */
+    const mobileOverlay = $('#mobileMenuOverlay');
+    function closeMobileMenu() { mobileOverlay?.classList.remove('open'); document.body.style.overflow = ''; }
+    $('#mobileMenuBtn')?.addEventListener('click', () => { mobileOverlay?.classList.add('open'); document.body.style.overflow = 'hidden'; });
+    $('#mobileMenuClose')?.addEventListener('click', closeMobileMenu);
+    mobileOverlay?.addEventListener('click', e => { if (e.target === mobileOverlay) closeMobileMenu(); });
+    $$('.mobile-cat-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const cat = trigger.closest('.mobile-cat');
+            const wasOpen = cat.classList.contains('open');
+            $$('.mobile-cat').forEach(c => c.classList.remove('open'));
+            if (!wasOpen) cat.classList.add('open');
+        });
+    });
+
+    /* ── Desktop dropdown hover (same behavior as homepage) ── */
+    $$('.nav-dropdown').forEach(dd => {
+        let ddTimeout;
+        dd.addEventListener('mouseenter', () => {
+            clearTimeout(ddTimeout);
+            $$('.nav-dropdown').forEach(o => { if (o !== dd) o.classList.remove('open'); });
+            dd.classList.add('open');
+        });
+        dd.addEventListener('mouseleave', () => { ddTimeout = setTimeout(() => dd.classList.remove('open'), 150); });
+    });
+
     /* ── Upload Logic ── */
     const uploadZone = $('#uploadZone');
     const uploadBtn = $('#uploadBtn');
