@@ -1,0 +1,10 @@
+# Local Claude Code permission settings
+.claude/settings.local.json
+
+# OS cruft
+Thumbs.db
+.DS_Store
+
+# Editor
+.vscode/
+*.swp

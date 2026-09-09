@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PDF Merge Toolkit - 48+ free PDF tools. Merge, split, compress, convert PDFs online. No sign-up required. 100% free, secure, and fast.">
+    <title>Free Online PDF Tools - PDF Merge Toolkit</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ==================== ANNOUNCE TICKER ==================== -->
+<div class="announce-ticker">
+    <div class="announce-track">
+        <span class="ticker-item"><i class="bi bi-emoji-smile"></i> No watermarks on any output</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-file-earmark-pdf"></i> 48+ PDF tools in one place</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item ticker-item--highlight"><i class="bi bi-shield-lock-fill"></i> We never store your data</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-lightning-charge-fill"></i> Lightning fast conversions</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-check-circle-fill"></i> 100% Free &mdash; No sign-up required</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-globe2"></i> Works entirely in your browser</span>
+        <span class="ticker-sep">+</span>
+        <!-- Duplicate for infinite scroll -->
+        <span class="ticker-item"><i class="bi bi-emoji-smile"></i> No watermarks on any output</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-file-earmark-pdf"></i> 48+ PDF tools in one place</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item ticker-item--highlight"><i class="bi bi-shield-lock-fill"></i> We never store your data</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-lightning-charge-fill"></i> Lightning fast conversions</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-check-circle-fill"></i> 100% Free &mdash; No sign-up required</span>
+        <span class="ticker-sep">+</span>
+        <span class="ticker-item"><i class="bi bi-globe2"></i> Works entirely in your browser</span>
+        <span class="ticker-sep">+</span>
+    </div>
+</div>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar navbar-expand sticky-top px-3 z-3 main-nav">
+    <div class="container-fluid position-relative">
+        <a class="navbar-brand d-flex align-items-center gap-3 me-3 text-decoration-none" href="/">
+            <div class="brand-name-wrap">
+                <div class="brand-name">PDF Merge <span class="brand-accent">Toolkit</span></div>
+                <div class="brand-sub">48+ free tools &middot; no sign-up</div>
+            </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="nav-links d-none d-lg-flex align-items-center gap-1 flex-grow-1 justify-content-center">
+            <div class="nav-dropdown">
+                <button class="nav-link-btn">Merge &amp; Organize <i class="bi bi-chevron-down nav-chev"></i></button>
+                <div class="nav-dropdown-menu">
+                    <a href="tools/merge-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-layers-fill"></i></span> Merge PDF</a>
+                    <a href="tools/split-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-scissors"></i></span> Split PDF</a>
+                    <a href="tools/organize-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-arrow-down-up"></i></span> Organize PDF</a>
+                    <a href="tools/rotate-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-arrow-repeat"></i></span> Rotate PDF</a>
+                    <a href="tools/remove-pages.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-trash3"></i></span> Remove Pages</a>
+                    <a href="tools/extract-pages.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-earmark-minus"></i></span> Extract Pages</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-link-btn">Convert &rarr; PDF <i class="bi bi-chevron-down nav-chev"></i></button>
+                <div class="nav-dropdown-menu">
+                    <a href="tools/image-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-image"></i></span> Image to PDF</a>
+                    <a href="tools/html-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-html"></i></span> HTML to PDF</a>
+                    <a href="tools/word-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-earmark-word"></i></span> Word to PDF</a>
+                    <a href="tools/excel-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-earmark-excel"></i></span> Excel to PDF</a>
+                    <a href="tools/powerpoint-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-earmark-ppt"></i></span> PowerPoint to PDF</a>
+                    <a href="tools/text-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-text"></i></span> Text to PDF</a>
+                    <a href="tools/markdown-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-markdown"></i></span> Markdown to PDF</a>
+                    <a href="tools/base64-to-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-code-slash"></i></span> Base64 to PDF</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-link-btn fw-bold">PDF Conversions <i class="bi bi-chevron-down nav-chev"></i></button>
+                <div class="nav-dropdown-menu nav-dropdown-menu--wide">
+                    <div class="nav-dd-group">
+                        <div class="nav-dd-label">PDF &rarr; Image</div>
+                        <a href="tools/pdf-to-png.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-png"></i></span> PDF to PNG</a>
+                        <a href="tools/pdf-to-jpg.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-jpg"></i></span> PDF to JPG</a>
+                        <a href="tools/pdf-to-tiff.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-tiff"></i></span> PDF to TIFF</a>
+                        <a href="tools/pdf-to-bmp.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-bmp"></i></span> PDF to BMP</a>
+                    </div>
+                    <div class="nav-dd-group">
+                        <div class="nav-dd-label">PDF &rarr; Document</div>
+                        <a href="tools/pdf-to-word.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-earmark-word"></i></span> PDF to Word</a>
+                        <a href="tools/pdf-to-excel.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-earmark-excel"></i></span> PDF to Excel</a>
+                        <a href="tools/pdf-to-powerpoint.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-earmark-ppt"></i></span> PDF to PPT</a>
+                        <a href="tools/pdf-to-text.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-text"></i></span> PDF to Text</a>
+                        <a href="tools/pdf-to-html.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-html"></i></span> PDF to HTML</a>
+                        <a href="tools/pdf-to-markdown.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-markdown"></i></span> PDF to MD</a>
+                        <a href="tools/pdf-to-xml.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-xml"></i></span> PDF to XML</a>
+                        <a href="tools/pdf-to-csv.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-filetype-csv"></i></span> PDF to CSV</a>
+                        <a href="tools/pdf-to-base64.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-code-slash"></i></span> PDF to Base64</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-link-btn">Edit &amp; Enhance <i class="bi bi-chevron-down nav-chev"></i></button>
+                <div class="nav-dropdown-menu">
+                    <a href="tools/compress-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-zip"></i></span> Compress PDF</a>
+                    <a href="tools/watermark-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-droplet-fill"></i></span> Watermark</a>
+                    <a href="tools/page-numbers.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-hash"></i></span> Page Numbers</a>
+                    <a href="tools/crop-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-crop"></i></span> Crop PDF</a>
+                    <a href="tools/resize-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-aspect-ratio"></i></span> Resize PDF</a>
+                    <a href="tools/grayscale-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-circle-half"></i></span> Grayscale</a>
+                    <a href="tools/flatten-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-layers"></i></span> Flatten PDF</a>
+                    <a href="tools/metadata-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-tag"></i></span> Metadata</a>
+                    <a href="tools/pdfa-convert.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-archive"></i></span> PDF/A</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-link-btn">Security <i class="bi bi-chevron-down nav-chev"></i></button>
+                <div class="nav-dropdown-menu">
+                    <a href="tools/protect-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-lock-fill"></i></span> Protect PDF</a>
+                    <a href="tools/unlock-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-unlock-fill"></i></span> Unlock PDF</a>
+                    <a href="tools/sign-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-pen-fill"></i></span> Sign PDF</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-link-btn">Extract &amp; Utility <i class="bi bi-chevron-down nav-chev"></i></button>
+                <div class="nav-dropdown-menu">
+                    <a href="tools/extract-images.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-images"></i></span> Extract Images</a>
+                    <a href="tools/extract-links.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-link-45deg"></i></span> Extract Links</a>
+                    <a href="tools/pdf-info.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-info-circle"></i></span> PDF Info</a>
+                    <a href="tools/repair-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-wrench"></i></span> Repair PDF</a>
+                    <a href="tools/compare-pdf.html" class="mega-tool-link"><span class="mega-icon"><i class="bi bi-file-diff"></i></span> Compare PDF</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right side actions -->
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <span class="nav-free-badge">FREE</span>
+
+            <!-- Theme Switcher -->
+            <div class="dropdown theme-dropdown">
+                <button class="nav-icon-btn" id="themeToggleBtn" title="Change theme">
+                    <i class="bi bi-palette-fill"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end theme-menu" id="themeMenu">
+                    <button class="theme-option active" data-theme="light"><span class="theme-dot" style="background:#f8fafc;border:1px solid #d1d5db"></span> Light</button>
+                    <button class="theme-option" data-theme="dark"><span class="theme-dot" style="background:#0b0f19"></span> Dark</button>
+                    <button class="theme-option" data-theme="ocean"><span class="theme-dot" style="background:#2563eb"></span> Ocean Blue</button>
+                    <button class="theme-option" data-theme="forest"><span class="theme-dot" style="background:#16a34a"></span> Forest Green</button>
+                    <button class="theme-option" data-theme="sunset"><span class="theme-dot" style="background:#ea580c"></span> Sunset</button>
+                    <button class="theme-option" data-theme="rose"><span class="theme-dot" style="background:#e11d48"></span> Rose</button>
+                    <button class="theme-option" data-theme="midnight"><span class="theme-dot" style="background:#0f172a"></span> Midnight</button>
+                    <button class="theme-option" data-theme="lavender"><span class="theme-dot" style="background:#9333ea"></span> Lavender</button>
+                    <button class="theme-option" data-theme="charcoal"><span class="theme-dot" style="background:#18181b"></span> Charcoal</button>
+                    <button class="theme-option" data-theme="emerald"><span class="theme-dot" style="background:#10b981"></span> Emerald</button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-icon-btn d-lg-none" id="mobileMenuBtn" title="Menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ==================== MOBILE MENU ==================== -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-drawer">
+        <div class="mobile-menu-header">
+            <div class="brand-name">PDF Merge <span class="brand-accent">Toolkit</span></div>
+            <button class="mobile-menu-close" id="mobileMenuClose"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="mobile-menu-body">
+            <div class="mobile-cat">
+                <button class="mobile-cat-trigger"><i class="bi bi-layers-fill"></i> Merge & Organize <i class="bi bi-chevron-down ms-auto"></i></button>
+                <div class="mobile-cat-panel">
+                    <a href="tools/merge-pdf.html">Merge PDF</a>
+                    <a href="tools/split-pdf.html">Split PDF</a>
+                    <a href="tools/organize-pdf.html">Organize PDF</a>
+                    <a href="tools/rotate-pdf.html">Rotate PDF</a>
+                    <a href="tools/remove-pages.html">Remove Pages</a>
+                    <a href="tools/extract-pages.html">Extract Pages</a>
+                </div>
+            </div>
+            <div class="mobile-cat">
+                <button class="mobile-cat-trigger"><i class="bi bi-file-earmark-arrow-down-fill"></i> Convert to PDF <i class="bi bi-chevron-down ms-auto"></i></button>
+                <div class="mobile-cat-panel">
+                    <a href="tools/image-to-pdf.html">Image to PDF</a>
+                    <a href="tools/html-to-pdf.html">HTML to PDF</a>
+                    <a href="tools/word-to-pdf.html">Word to PDF</a>
+                    <a href="tools/excel-to-pdf.html">Excel to PDF</a>
+                    <a href="tools/powerpoint-to-pdf.html">PowerPoint to PDF</a>
+                    <a href="tools/text-to-pdf.html">Text to PDF</a>
+                    <a href="tools/markdown-to-pdf.html">Markdown to PDF</a>
+                    <a href="tools/base64-to-pdf.html">Base64 to PDF</a>
+                </div>
+            </div>
+            <div class="mobile-cat">
+                <button class="mobile-cat-trigger"><i class="bi bi-image-fill"></i> PDF to Image <i class="bi bi-chevron-down ms-auto"></i></button>
+                <div class="mobile-cat-panel">
+                    <a href="tools/pdf-to-png.html">PDF to PNG</a>
+                    <a href="tools/pdf-to-jpg.html">PDF to JPG</a>
+                    <a href="tools/pdf-to-tiff.html">PDF to TIFF</a>
+                    <a href="tools/pdf-to-bmp.html">PDF to BMP</a>
+                </div>
+            </div>
+            <div class="mobile-cat">
+                <button class="mobile-cat-trigger"><i class="bi bi-file-earmark-text-fill"></i> PDF to Document <i class="bi bi-chevron-down ms-auto"></i></button>
+                <div class="mobile-cat-panel">
+                    <a href="tools/pdf-to-word.html">PDF to Word</a>
+                    <a href="tools/pdf-to-excel.html">PDF to Excel</a>
+                    <a href="tools/pdf-to-powerpoint.html">PDF to PowerPoint</a>
+                    <a href="tools/pdf-to-text.html">PDF to Text</a>
+                    <a href="tools/pdf-to-html.html">PDF to HTML</a>
+                    <a href="tools/pdf-to-markdown.html">PDF to Markdown</a>
+                    <a href="tools/pdf-to-xml.html">PDF to XML</a>
+                    <a href="tools/pdf-to-csv.html">PDF to CSV</a>
+                    <a href="tools/pdf-to-base64.html">PDF to Base64</a>
+                </div>
+            </div>
+            <div class="mobile-cat">
+                <button class="mobile-cat-trigger"><i class="bi bi-pencil-square"></i> Edit & Enhance <i class="bi bi-chevron-down ms-auto"></i></button>
+                <div class="mobile-cat-panel">
+                    <a href="tools/compress-pdf.html">Compress PDF</a>
+                    <a href="tools/watermark-pdf.html">Watermark</a>
+                    <a href="tools/page-numbers.html">Page Numbers</a>
+                    <a href="tools/crop-pdf.html">Crop PDF</a>
+                    <a href="tools/resize-pdf.html">Resize PDF</a>
+                    <a href="tools/grayscale-pdf.html">Grayscale</a>
+                    <a href="tools/flatten-pdf.html">Flatten PDF</a>
+                    <a href="tools/metadata-pdf.html">Metadata</a>
+                    <a href="tools/pdfa-convert.html">PDF/A</a>
+                </div>
+            </div>
+            <div class="mobile-cat">
+                <button class="mobile-cat-trigger"><i class="bi bi-shield-lock-fill"></i> Security <i class="bi bi-chevron-down ms-auto"></i></button>
+                <div class="mobile-cat-panel">
+                    <a href="tools/protect-pdf.html">Protect PDF</a>
+                    <a href="tools/unlock-pdf.html">Unlock PDF</a>
+                    <a href="tools/sign-pdf.html">Sign PDF</a>
+                </div>
+            </div>
+            <div class="mobile-cat">
+                <button class="mobile-cat-trigger"><i class="bi bi-tools"></i> Extract & Utility <i class="bi bi-chevron-down ms-auto"></i></button>
+                <div class="mobile-cat-panel">
+                    <a href="tools/extract-images.html">Extract Images</a>
+                    <a href="tools/extract-links.html">Extract Links</a>
+                    <a href="tools/pdf-info.html">PDF Info</a>
+                    <a href="tools/repair-pdf.html">Repair PDF</a>
+                    <a href="tools/compare-pdf.html">Compare PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<main>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero-section text-center">
+        <div class="hero-glow"></div>
+        <div class="container position-relative">
+            <div class="hero-pill mb-2">
+                <span class="pulse-dot"></span>
+                100% Free &amp; No Sign-up Required
+            </div>
+            <h1 class="fw-black mb-3">Every tool you need to work with<br><span class="hero-gradient-text">PDFs in one place.</span></h1>
+            <p class="text-secondary mb-3 mx-auto" style="max-width:680px;font-size:1.05rem;">
+                Every tool you need to use PDFs, at your fingertips. All are 100% FREE and easy to use! Merge, split, compress, convert, rotate, unlock and watermark PDFs with just a few clicks.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-0">
+                <span class="hero-trust-item">
+                    <span class="trust-icon trust-icon--blue"><i class="bi bi-lightning-charge-fill"></i></span> Lightning Fast
+                </span>
+                <span class="hero-trust-item">
+                    <span class="trust-icon trust-icon--green"><i class="bi bi-shield-lock-fill"></i></span> 100% Secure
+                </span>
+                <span class="hero-trust-item">
+                    <span class="trust-icon trust-icon--indigo"><i class="bi bi-globe2"></i></span> Works in Browser
+                </span>
+                <span class="hero-trust-item">
+                    <span class="trust-icon trust-icon--amber"><i class="bi bi-droplet-fill"></i></span> No Watermark
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TOOLS SECTION ==================== -->
+    <div class="container" id="toolsSection">
+        <!-- Filter Tabs -->
+        <div class="text-center mb-3 pt-4">
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                <button class="filter-tab active" data-filter="all"><i class="bi bi-grid-3x3-gap-fill"></i> All</button>
+                <button class="filter-tab" data-filter="Merge & Organize">Merge &amp; Organize</button>
+                <button class="filter-tab" data-filter="Convert to PDF">Convert to PDF</button>
+                <button class="filter-tab" data-filter="Convert from PDF">Convert from PDF</button>
+                <button class="filter-tab" data-filter="Edit & Enhance">Edit &amp; Enhance</button>
+                <button class="filter-tab" data-filter="Security">Security</button>
+                <button class="filter-tab" data-filter="Extract">Extract</button>
+                <button class="filter-tab" data-filter="Utility">Utility</button>
+            </div>
+            <!-- Search -->
+            <div class="search-wrap mx-auto mb-4">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="search-input" id="toolSearch" placeholder="Search all tools...">
+            </div>
+        </div>
+        <!-- Tool Cards Grid -->
+        <div class="row g-3 mb-5" id="toolGrid">
+            <!-- Cards injected by JS -->
+        </div>
+        <div class="text-center text-muted py-4 d-none" id="noResults">
+            <i class="bi bi-search" style="font-size:2rem"></i>
+            <p class="mt-2">No tools match your search.</p>
+        </div>
+    </div>
+
+    <!-- ==================== STATS SECTION ==================== -->
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row g-3 justify-content-center">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item text-center">
+                        <div class="stat-number text-indigo">48+</div>
+                        <div class="stat-label">PDF Tools</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item text-center">
+                        <div class="stat-number text-green">FREE</div>
+                        <div class="stat-label">Forever, No Limits</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item text-center">
+                        <div class="stat-number text-amber">0s</div>
+                        <div class="stat-label">File Retention</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item text-center">
+                        <div class="stat-number text-rose">256-bit</div>
+                        <div class="stat-label">SSL Encryption</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="how-section py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-2">How It Works</h2>
+            <p class="text-center text-secondary mb-4">Three simple steps to process your files</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="how-card text-center">
+                        <div class="how-step-num">1</div>
+                        <div class="how-icon"><i class="bi bi-cloud-arrow-up-fill"></i></div>
+                        <h5 class="fw-bold">Upload Your File</h5>
+                        <p class="text-secondary mb-0">Select or drag &amp; drop your PDF or document. Up to 50 MB per file.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="how-card text-center">
+                        <div class="how-step-num">2</div>
+                        <div class="how-icon"><i class="bi bi-gear-fill"></i></div>
+                        <h5 class="fw-bold">We Process It</h5>
+                        <p class="text-secondary mb-0">Our servers process your file in seconds using zero-memory streaming.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="how-card text-center">
+                        <div class="how-step-num">3</div>
+                        <div class="how-icon"><i class="bi bi-download"></i></div>
+                        <h5 class="fw-bold">Download Result</h5>
+                        <p class="text-secondary mb-0">Your processed file downloads automatically. Original files are deleted instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES ==================== -->
+    <section class="features-section py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-2">Why Choose PDF Merge Toolkit?</h2>
+            <p class="text-center text-secondary mb-4">Trusted by millions for fast, secure, and free PDF processing</p>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="feat-card feat-card--indigo">
+                        <div class="feat-icon feat-icon--indigo"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Lightning Fast</h5>
+                            <p class="text-secondary mb-0">Process your files quickly and securely. We never store your data.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feat-card feat-card--green">
+                        <div class="feat-icon feat-icon--green"><i class="bi bi-shield-lock-fill"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Bank-Grade Security</h5>
+                            <p class="text-secondary mb-0">256-bit SSL, CSRF protection, rate limiting. Files deleted in 30 seconds.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feat-card feat-card--amber">
+                        <div class="feat-icon feat-icon--amber"><i class="bi bi-infinity"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Truly Unlimited</h5>
+                            <p class="text-secondary mb-0">No daily limits, no account required, no watermarks on your files.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feat-card feat-card--rose">
+                        <div class="feat-icon feat-icon--rose"><i class="bi bi-phone-fill"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Works Everywhere</h5>
+                            <p class="text-secondary mb-0">Desktop, tablet, mobile &mdash; works on any device with a browser.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-section">
+        <div class="container text-center py-5">
+            <div class="cta-badge mb-3">100% Free &middot; No Account Needed</div>
+            <h2 class="text-white fw-bold mb-2" style="font-size:2rem;">Ready to work with your PDFs?</h2>
+            <p class="text-white-50 mb-4">No sign-up. No payment. Just upload and go.</p>
+            <a href="#toolsSection" class="btn btn-cta">
+                <i class="bi bi-grid-3x3-gap-fill"></i> Browse All Tools
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="mt-auto site-footer">
+    <!-- Footer Stats Band -->
+    <div class="footer-stats-band">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center gap-4">
+                <div class="footer-stat">
+                    <i class="bi bi-shield-lock-fill text-indigo"></i>
+                    <span>256-bit SSL</span>
+                </div>
+                <div class="footer-stat">
+                    <i class="bi bi-person-x-fill text-green"></i>
+                    <span>No sign-up</span>
+                </div>
+                <div class="footer-stat">
+                    <i class="bi bi-eye-slash-fill text-amber"></i>
+                    <span>Private</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Main -->
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- Brand -->
+            <div class="col-lg-4 col-md-6">
+                <div class="brand-name mb-2" style="font-size:1.3rem;">PDF Merge <span class="brand-accent">Toolkit</span></div>
+                <div class="brand-sub mb-3">48+ free tools &middot; no sign-up</div>
+                <p class="text-secondary" style="font-size:0.88rem;">Free, private PDF tools. No sign-up required. All files are deleted instantly after processing.</p>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="footer-trust-badge"><i class="bi bi-shield-lock-fill"></i> 256-bit SSL</span>
+                    <span class="footer-trust-badge"><i class="bi bi-person-x"></i> No sign-up</span>
+                    <span class="footer-trust-badge"><i class="bi bi-eye-slash"></i> Private</span>
+                </div>
+            </div>
+            <!-- Popular -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6 class="footer-heading">Popular</h6>
+                <a href="tools/merge-pdf.html" class="footer-link">Merge PDF</a>
+                <a href="tools/compress-pdf.html" class="footer-link">Compress PDF</a>
+                <a href="tools/split-pdf.html" class="footer-link">Split PDF</a>
+                <a href="tools/rotate-pdf.html" class="footer-link">Rotate PDF</a>
+                <a href="tools/watermark-pdf.html" class="footer-link">Watermark</a>
+                <a href="tools/organize-pdf.html" class="footer-link">Organize PDF</a>
+            </div>
+            <!-- Convert -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6 class="footer-heading">Convert</h6>
+                <a href="tools/pdf-to-png.html" class="footer-link">PDF to PNG</a>
+                <a href="tools/image-to-pdf.html" class="footer-link">Image to PDF</a>
+                <a href="tools/word-to-pdf.html" class="footer-link">Word to PDF</a>
+                <a href="tools/html-to-pdf.html" class="footer-link">HTML to PDF</a>
+                <a href="tools/pdf-to-jpg.html" class="footer-link">PDF to JPG</a>
+                <a href="tools/excel-to-pdf.html" class="footer-link">Excel to PDF</a>
+            </div>
+            <!-- Edit & Secure -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6 class="footer-heading">Edit & Secure</h6>
+                <a href="tools/edit-pdf.html" class="footer-link">Edit PDF</a>
+                <a href="tools/sign-pdf.html" class="footer-link">Sign PDF</a>
+                <a href="tools/protect-pdf.html" class="footer-link">Protect PDF</a>
+                <a href="tools/unlock-pdf.html" class="footer-link">Unlock PDF</a>
+                <a href="tools/page-numbers.html" class="footer-link">Page Numbers</a>
+                <a href="tools/redact-pdf.html" class="footer-link">Redact PDF</a>
+            </div>
+            <!-- Legal -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6 class="footer-heading">Legal</h6>
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="contact.html" class="footer-link">Contact Us</a>
+                <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                <a href="terms.html" class="footer-link">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center py-3">
+            <span>&copy; 2026 PDF Merge Toolkit &middot; Your PDF Editor. Developed by <strong>Neel Sahani</strong></span>
+            <div class="d-flex gap-3">
+                <a href="privacy.html" class="footer-link">Privacy</a>
+                <a href="terms.html" class="footer-link">Terms</a>
+                <a href="about.html" class="footer-link">About</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
