@@ -1142,6 +1142,7 @@ body {
     font-size: 0.82rem;
     color: var(--text-muted);
 }
+.footer-copy strong { color: var(--accent); }
 
 /* ===========================================================
    RESPONSIVE
@@ -1196,8 +1197,23 @@ body {
     .footer-bottom .container {
         flex-direction: column;
         justify-content: center;
-        gap: 8px;
+        gap: 10px;
         text-align: center;
+        padding-top: 1.1rem !important;
+        padding-bottom: 1.4rem !important;
+    }
+    .footer-copy {
+        font-size: 0.78rem;
+        line-height: 1.7;
+    }
+    .footer-bottom .d-flex {
+        gap: 1.2rem !important;
+        justify-content: center;
+        width: 100%;
+    }
+    .footer-bottom .footer-link {
+        font-size: 0.85rem;
+        font-weight: 600;
     }
 }
 
