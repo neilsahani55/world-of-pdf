@@ -141,7 +141,7 @@ The site includes 10 fully-designed color themes, all using CSS custom propertie
 
 ## Developer
 
-**Usama Gani**
+**Neel Sahani**
 
 ## License
 
