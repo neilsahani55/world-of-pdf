@@ -70,7 +70,9 @@ A comprehensive, free, browser-based PDF platform with **48+ tools**. No sign-up
 | **Flatten PDF** | Bakes interactive form fields into the static page content |
 | **Metadata** | Rewrites title, author, subject, and keywords |
 | **PDF/A** | Flattens forms and re-saves for archival use |
-| **Edit PDF** | *Coming soon* |
+| **Edit PDF** | Stamps your text (custom size, color, position) and an optional PNG/JPG image onto all, first, or last pages |
+| **Header & Footer** | Draws your header and footer text on every page with left/center/right alignment |
+| **N-up PDF** | Embeds 2 or 4 pages per sheet, scaled to fit — great for print handouts |
 
 ### Security
 | Tool | How it works |
@@ -78,7 +80,7 @@ A comprehensive, free, browser-based PDF platform with **48+ tools**. No sign-up
 | **Protect PDF** | Re-saves the PDF; note that true AES encryption isn't possible client-side with pdf-lib — the page says so honestly |
 | **Unlock PDF** | Loads with `ignoreEncryption` and re-saves without the password (for PDFs you own) |
 | **Sign PDF** | Lets you draw a signature on canvas (mouse or touch) and stamps it on the first/last/all pages |
-| **Redact PDF** | *Coming soon* |
+| **Redact PDF** | Finds your search terms by text position, blacks them out, and rasterizes every page so the removed text is permanently unrecoverable |
 
 ### Extract & Utility
 | Tool | How it works |
@@ -124,10 +126,10 @@ world-of-pdf/
 │   ├── bootstrap.bundle.min.js  # Bootstrap JS
 │   ├── app.js                   # Homepage logic (grid, tabs, search, menus, themes)
 │   ├── binary-utils.js          # ZIP / BMP / TIFF / DOCX / CSV binary helpers
-│   └── pdf-tools-engine.js      # Shared engine driving all 48 tool pages
+│   └── pdf-tools-engine.js      # Shared engine driving all 49 tool pages
 └── tools/
     ├── tool-template.html       # Base template (all tool pages are generated from it)
-    ├── merge-pdf.html           # 48 individual tool pages
+    ├── merge-pdf.html           # 49 individual tool pages
     └── ...
 ```
 

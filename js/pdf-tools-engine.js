@@ -55,8 +55,10 @@
         'pdf-info':       { name: 'PDF Info', desc: 'View page count, metadata & details', icon: 'bi-info-circle', color: 'indigo', accept: '.pdf', btnText: 'Get Info' },
         'repair-pdf':     { name: 'Repair PDF', desc: 'Fix corrupted or damaged PDF files', icon: 'bi-wrench', color: 'orange', accept: '.pdf', btnText: 'Repair' },
         'compare-pdf':    { name: 'Compare PDF', desc: 'Find text differences between two PDFs', icon: 'bi-file-diff', color: 'purple', accept: '.pdf', multiple: true, btnText: 'Compare', minFiles: 2 },
-        'edit-pdf':       { name: 'Edit PDF', desc: 'Add text and images to your PDF', icon: 'bi-pencil', color: 'purple', accept: '.pdf', btnText: 'Edit PDF', soon: true },
-        'redact-pdf':     { name: 'Redact PDF', desc: 'Permanently black out sensitive info', icon: 'bi-eraser-fill', color: 'rose', accept: '.pdf', btnText: 'Redact', soon: true },
+        'edit-pdf':       { name: 'Edit PDF', desc: 'Add text and images to your PDF', icon: 'bi-pencil', color: 'purple', accept: '.pdf', btnText: 'Apply Edits', options: 'edit' },
+        'redact-pdf':     { name: 'Redact PDF', desc: 'Permanently black out sensitive info', icon: 'bi-eraser-fill', color: 'rose', accept: '.pdf', btnText: 'Redact', options: 'redact' },
+        'header-footer':  { name: 'Header & Footer', desc: 'Add header and footer text to every page', icon: 'bi-distribute-vertical', color: 'teal', accept: '.pdf', btnText: 'Add Header & Footer', options: 'headerFooter' },
+        'nup-pdf':        { name: 'N-up PDF', desc: 'Combine 2 or 4 pages onto one sheet', icon: 'bi-grid-1x2', color: 'purple', accept: '.pdf', btnText: 'Combine Pages', options: 'nup' },
         'ocr-pdf':        { name: 'OCR PDF', desc: 'Extract text from scanned documents', icon: 'bi-eye', color: 'teal', accept: '.pdf', btnText: 'Run OCR' },
     };
 
@@ -245,6 +247,28 @@
                 <label class="mt-2">Place on Page</label><select id="optSignPage"><option value="last">Last Page</option><option value="first">First Page</option><option value="all">All Pages</option></select></div>`,
             base64input: `<div class="tool-option-group"><label>Paste Base64 String</label>
                 <textarea id="optBase64" rows="5" placeholder="Paste your Base64-encoded PDF string here..."></textarea></div>`,
+            edit: `<div class="tool-option-group"><label>Text to Add</label>
+                <textarea id="optEditText" rows="3" placeholder="Type the text to place on the PDF..."></textarea>
+                <label class="mt-2">Font Size</label><input type="number" id="optEditSize" value="14" min="6" max="96">
+                <label class="mt-2">Text Color</label><input type="color" id="optEditColor" value="#111111">
+                <label class="mt-2">Position</label><select id="optEditPos">
+                    <option value="center">Center</option><option value="top-left">Top Left</option><option value="top-center">Top Center</option><option value="top-right">Top Right</option>
+                    <option value="bottom-left">Bottom Left</option><option value="bottom-center">Bottom Center</option><option value="bottom-right">Bottom Right</option></select>
+                <label class="mt-2">Apply To</label><select id="optEditPages"><option value="all">All pages</option><option value="first">First page</option><option value="last">Last page</option></select>
+                <label class="mt-2">Image (optional)</label><input type="file" id="optEditImage" accept=".png,.jpg,.jpeg">
+                <div class="page-range-hint">A PNG or JPG stamped at the chosen position</div></div>`,
+            redact: `<div class="tool-option-group"><label>Words / Phrases to Redact</label>
+                <textarea id="optRedactTerms" rows="4" placeholder="One word or phrase per line, e.g.&#10;John Doe&#10;555-0132"></textarea>
+                <div class="page-range-hint">Matching is case-insensitive. Matched text is blacked out and pages are converted to images, so the removed text cannot be recovered from the file.</div></div>`,
+            headerFooter: `<div class="tool-option-group"><label>Header Text</label>
+                <input type="text" id="optHeaderText" placeholder="e.g. Company Confidential">
+                <label class="mt-2">Footer Text</label><input type="text" id="optFooterText" placeholder="e.g. worldofpdf">
+                <label class="mt-2">Font Size</label><input type="number" id="optHfSize" value="10" min="6" max="36">
+                <label class="mt-2">Alignment</label><select id="optHfAlign"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select>
+                <div class="page-range-hint">Leave either field empty to add only a header or only a footer</div></div>`,
+            nup: `<div class="tool-option-group"><label>Pages per Sheet</label>
+                <select id="optNupCount"><option value="2">2 pages side by side (landscape sheet)</option><option value="4">4 pages in a grid (portrait sheet)</option></select>
+                <div class="page-range-hint">Great for handouts and printing — pages are scaled to fit each slot</div></div>`,
         };
 
         if (html[opt]) c.innerHTML = html[opt];
@@ -392,6 +416,10 @@
             'repair-pdf': processRepair,
             'compare-pdf': processCompare,
             'ocr-pdf': processOcr,
+            'edit-pdf': processEditPdf,
+            'redact-pdf': processRedact,
+            'header-footer': processHeaderFooter,
+            'nup-pdf': processNup,
         };
         const fn = processors[slug];
         if (fn) await fn();
@@ -1082,6 +1110,169 @@
             else result += 'Page ' + i + ': DIFFERENT\n  File 1: ' + text1.substring(0, 100) + '...\n  File 2: ' + text2.substring(0, 100) + '...\n';
         }
         setResult(new Blob([result], { type: 'text/plain' }), 'comparison.txt');
+    }
+
+    /* ─── EDIT PDF (stamp text and/or an image onto pages) ─── */
+
+    function positionXY(pos, pageW, pageH, itemW, itemH, margin) {
+        let x, y;
+        if (pos.includes('left')) x = margin;
+        else if (pos.includes('right')) x = pageW - itemW - margin;
+        else x = (pageW - itemW) / 2;
+        if (pos.includes('top')) y = pageH - itemH - margin;
+        else if (pos.includes('bottom')) y = margin;
+        else y = (pageH - itemH) / 2;
+        return { x, y };
+    }
+
+    async function processEditPdf() {
+        const text = ($('#optEditText')?.value || '').trim();
+        const imgFile = $('#optEditImage')?.files[0];
+        if (!text && !imgFile) { alert('Enter text or choose an image to add.'); throw new Error('Nothing to add'); }
+
+        const bytes = await readFile(selectedFiles[0]);
+        const doc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+        const font = await doc.embedFont(StandardFonts.Helvetica);
+        const size = parseInt($('#optEditSize')?.value || '14');
+        const hex = $('#optEditColor')?.value || '#111111';
+        const color = rgb(parseInt(hex.slice(1, 3), 16) / 255, parseInt(hex.slice(3, 5), 16) / 255, parseInt(hex.slice(5, 7), 16) / 255);
+        const pos = $('#optEditPos')?.value || 'center';
+        const pageSel = $('#optEditPages')?.value || 'all';
+
+        let img = null;
+        if (imgFile) {
+            const n = imgFile.name.toLowerCase();
+            if (n.endsWith('.png')) img = await doc.embedPng(await readFile(imgFile));
+            else img = await doc.embedJpg(await readFile(imgFile));
+        }
+
+        const all = doc.getPages();
+        const targets = pageSel === 'first' ? [all[0]] : pageSel === 'last' ? [all[all.length - 1]] : all;
+        const lines = text ? text.split('\n') : [];
+        const lineH = size * 1.3;
+
+        targets.forEach(page => {
+            const { width, height } = page.getSize();
+            let stackTop = null;
+            if (img) {
+                const maxW = Math.min(200, width * 0.5);
+                const sc = Math.min(1, maxW / img.width);
+                const iw = img.width * sc, ih = img.height * sc;
+                const p = positionXY(pos, width, height, iw, ih + (lines.length ? lines.length * lineH + 8 : 0), 40);
+                page.drawImage(img, { x: p.x + (pos.includes('left') || pos.includes('right') ? 0 : 0), y: p.y + (lines.length ? lines.length * lineH + 8 : 0), width: iw, height: ih });
+                stackTop = { x: p.x, y: p.y + lines.length * lineH };
+            }
+            if (lines.length) {
+                const widest = Math.max(...lines.map(l => font.widthOfTextAtSize(l, size)));
+                const blockH = lines.length * lineH;
+                const p = stackTop || positionXY(pos, width, height, widest, blockH, 40);
+                lines.forEach((line, li) => {
+                    page.drawText(line, { x: p.x, y: p.y + blockH - (li + 1) * lineH + (lineH - size) / 2, size, font, color });
+                });
+            }
+        });
+        setProgress(80);
+        const out = await doc.save();
+        setResult(new Blob([out], { type: 'application/pdf' }), 'edited.pdf');
+    }
+
+    /* ─── REDACT (black out matches, rasterize pages so text is unrecoverable) ─── */
+    async function processRedact() {
+        const terms = ($('#optRedactTerms')?.value || '').split('\n').map(t => t.trim().toLowerCase()).filter(Boolean);
+        if (!terms.length) { alert('Enter at least one word or phrase to redact.'); throw new Error('No terms'); }
+
+        const bytes = await readFile(selectedFiles[0]);
+        const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+        const doc = await PDFDocument.create();
+        const scale = 2;
+        let hits = 0;
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+            setProgress(10 + (80 * i / pdf.numPages));
+            const page = await pdf.getPage(i);
+            const vp = page.getViewport({ scale });
+            const canvas = document.createElement('canvas');
+            canvas.width = vp.width; canvas.height = vp.height;
+            const ctx = canvas.getContext('2d');
+            await page.render({ canvasContext: ctx, viewport: vp }).promise;
+
+            const content = await page.getTextContent();
+            ctx.fillStyle = '#000';
+            for (const item of content.items) {
+                if (!item.str) continue;
+                if (!terms.some(t => item.str.toLowerCase().includes(t))) continue;
+                const h = (item.height || 12) * scale;
+                const w = (item.width || (item.height || 12) * item.str.length * 0.55) * scale;
+                const [cx, cy] = vp.convertToViewportPoint(item.transform[4], item.transform[5]);
+                ctx.fillRect(cx - 2, cy - h - 3, w + 5, h + 8);
+                hits++;
+            }
+
+            const pngBytes = await new Promise(res => canvas.toBlob(b => b.arrayBuffer().then(res), 'image/png'));
+            const img = await doc.embedPng(pngBytes);
+            const p = doc.addPage([vp.width / scale, vp.height / scale]);
+            p.drawImage(img, { x: 0, y: 0, width: vp.width / scale, height: vp.height / scale });
+        }
+
+        if (!hits) throw new Error('No occurrences of the given text were found in this PDF. Note: scanned PDFs have no text layer — run OCR first to check content.');
+        const out = await doc.save();
+        setResult(new Blob([out], { type: 'application/pdf' }), 'redacted.pdf');
+        $('#downloadInfo').textContent = 'redacted.pdf (' + fmtSize(out.byteLength) + ') — ' + hits + ' area(s) blacked out. Pages were converted to images, so the removed text is permanently gone.';
+    }
+
+    /* ─── HEADER & FOOTER ─── */
+    async function processHeaderFooter() {
+        const headerText = ($('#optHeaderText')?.value || '').trim();
+        const footerText = ($('#optFooterText')?.value || '').trim();
+        if (!headerText && !footerText) { alert('Enter header text, footer text, or both.'); throw new Error('Nothing to add'); }
+
+        const bytes = await readFile(selectedFiles[0]);
+        const doc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+        const font = await doc.embedFont(StandardFonts.Helvetica);
+        const size = parseInt($('#optHfSize')?.value || '10');
+        const align = $('#optHfAlign')?.value || 'center';
+        const color = rgb(0.35, 0.35, 0.35);
+
+        const xFor = (textW, pageW) => align === 'left' ? 40 : align === 'right' ? pageW - textW - 40 : (pageW - textW) / 2;
+
+        doc.getPages().forEach(page => {
+            const { width, height } = page.getSize();
+            if (headerText) page.drawText(headerText, { x: xFor(font.widthOfTextAtSize(headerText, size), width), y: height - 30, size, font, color });
+            if (footerText) page.drawText(footerText, { x: xFor(font.widthOfTextAtSize(footerText, size), width), y: 20, size, font, color });
+        });
+        setProgress(80);
+        const out = await doc.save();
+        setResult(new Blob([out], { type: 'application/pdf' }), 'header-footer.pdf');
+    }
+
+    /* ─── N-UP (2 or 4 pages per sheet) ─── */
+    async function processNup() {
+        const per = parseInt($('#optNupCount')?.value || '2');
+        const bytes = await readFile(selectedFiles[0]);
+        const doc = await PDFDocument.create();
+        const embedded = await doc.embedPdf(bytes, (await PDFDocument.load(bytes, { ignoreEncryption: true })).getPageIndices());
+
+        const A4W = 595.28, A4H = 841.89;
+        const sheetSize = per === 2 ? [A4H, A4W] : [A4W, A4H];
+        const slots = per === 2
+            ? [{ x: 0, y: 0, w: A4H / 2, h: A4W }, { x: A4H / 2, y: 0, w: A4H / 2, h: A4W }]
+            : [{ x: 0, y: A4H / 2, w: A4W / 2, h: A4H / 2 }, { x: A4W / 2, y: A4H / 2, w: A4W / 2, h: A4H / 2 },
+               { x: 0, y: 0, w: A4W / 2, h: A4H / 2 }, { x: A4W / 2, y: 0, w: A4W / 2, h: A4H / 2 }];
+
+        for (let i = 0; i < embedded.length; i += per) {
+            setProgress(10 + (80 * i / embedded.length));
+            const sheet = doc.addPage([sheetSize[0], sheetSize[1]]);
+            for (let j = 0; j < per && i + j < embedded.length; j++) {
+                const ep = embedded[i + j];
+                const slot = slots[j];
+                const margin = 12;
+                const sc = Math.min((slot.w - margin * 2) / ep.width, (slot.h - margin * 2) / ep.height);
+                const w = ep.width * sc, h = ep.height * sc;
+                sheet.drawPage(ep, { x: slot.x + (slot.w - w) / 2, y: slot.y + (slot.h - h) / 2, xScale: sc, yScale: sc });
+            }
+        }
+        const out = await doc.save();
+        setResult(new Blob([out], { type: 'application/pdf' }), 'n-up.pdf');
     }
 
     /* ─── OCR (Tesseract.js, loaded on demand — runs fully in-browser) ─── */

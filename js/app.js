@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Compress PDF', desc: 'Reduce file size while keeping quality', cat: 'Edit & Enhance', icon: 'bi-file-zip', color: 'indigo', href: 'tools/compress-pdf.html' },
         { name: 'Watermark', desc: 'Stamp text on every page of your PDF', cat: 'Edit & Enhance', icon: 'bi-droplet-fill', color: 'blue', href: 'tools/watermark-pdf.html' },
         { name: 'Page Numbers', desc: 'Number PDF pages with custom positioning', cat: 'Edit & Enhance', icon: 'bi-hash', color: 'amber', href: 'tools/page-numbers.html' },
-        { name: 'Edit PDF', desc: 'Add text and images to your PDF', cat: 'Edit & Enhance', icon: 'bi-pencil', color: 'purple', href: 'tools/edit-pdf.html', soon: true },
+        { name: 'Edit PDF', desc: 'Add text and images to your PDF', cat: 'Edit & Enhance', icon: 'bi-pencil', color: 'purple', href: 'tools/edit-pdf.html' },
+        { name: 'Header & Footer', desc: 'Add header and footer text to every page', cat: 'Edit & Enhance', icon: 'bi-distribute-vertical', color: 'teal', href: 'tools/header-footer.html' },
+        { name: 'N-up PDF', desc: 'Combine 2 or 4 pages onto one sheet', cat: 'Edit & Enhance', icon: 'bi-grid-1x2', color: 'purple', href: 'tools/nup-pdf.html' },
         { name: 'Crop PDF', desc: 'Trim margins from all or specific pages', cat: 'Edit & Enhance', icon: 'bi-crop', color: 'green', href: 'tools/crop-pdf.html' },
         { name: 'Resize PDF', desc: 'Change page dimensions to A4, Letter, or custom', cat: 'Edit & Enhance', icon: 'bi-aspect-ratio', color: 'cyan', href: 'tools/resize-pdf.html' },
         { name: 'Grayscale', desc: 'Turn color PDF into black & white', cat: 'Edit & Enhance', icon: 'bi-circle-half', color: 'gray', href: 'tools/grayscale-pdf.html' },
@@ -56,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Security
         { name: 'Protect PDF', desc: 'Add password encryption and set permissions', cat: 'Security', icon: 'bi-lock-fill', color: 'indigo', href: 'tools/protect-pdf.html' },
         { name: 'Unlock PDF', desc: 'Remove password protection', cat: 'Security', icon: 'bi-unlock-fill', color: 'green', href: 'tools/unlock-pdf.html' },
-        { name: 'Redact PDF', desc: 'Permanently black out sensitive info', cat: 'Security', icon: 'bi-eraser-fill', color: 'rose', href: 'tools/redact-pdf.html', soon: true },
+        { name: 'Redact PDF', desc: 'Permanently black out sensitive info', cat: 'Security', icon: 'bi-eraser-fill', color: 'rose', href: 'tools/redact-pdf.html' },
         { name: 'Sign PDF', desc: 'Add your signature to any PDF document', cat: 'Security', icon: 'bi-pen-fill', color: 'blue', href: 'tools/sign-pdf.html' },
 
         // Extract
